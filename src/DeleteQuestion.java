@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -16,13 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
 
-public class UpdateQuestion extends JFrame {
 
-	
+public class DeleteQuestion extends JFrame {
+
 	private JPanel contentPane;
 	private JTextField txtQuestion;
 	private JTextField txtOption;
@@ -31,6 +28,7 @@ public class UpdateQuestion extends JFrame {
 	private JTextField txtOption_3;
 	private JTextField txtAnswer;
 	private JTextField textField_6;
+
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +36,7 @@ public class UpdateQuestion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UpdateQuestion frame = new UpdateQuestion();
+					DeleteQuestion frame = new DeleteQuestion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +48,7 @@ public class UpdateQuestion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UpdateQuestion() {
+	public DeleteQuestion() {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +61,7 @@ public class UpdateQuestion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Update a Question");
+		JLabel lblNewLabel = new JLabel("Delete a Question");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setForeground(SystemColor.textHighlightText);
@@ -72,9 +70,9 @@ public class UpdateQuestion extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_7 = new JLabel("Question No.");
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_7.setForeground(new Color(255, 255, 255));
-		lblNewLabel_7.setBounds(222, 86, 94, 14);
+		lblNewLabel_7.setBounds(264, 86, 114, 14);
 		contentPane.add(lblNewLabel_7);
 		
 		JButton btnNewButton = new JButton("Close");
@@ -145,7 +143,7 @@ public class UpdateQuestion extends JFrame {
 		txtAnswer.setBounds(40, 333, 829, 20);
 		contentPane.add(txtAnswer);
 		
-		JButton btnNewButton_1 = new JButton("Update");
+		JButton btnNewButton_1 = new JButton("Delete");
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -164,17 +162,17 @@ public class UpdateQuestion extends JFrame {
 						mess.setAlwaysOnTop(true);
 						JOptionPane.showMessageDialog(mess,"Please Enter Question Number!");
 						setVisible(false);
-						new UpdateQuestion().setVisible(true);
+						new DeleteQuestion().setVisible(true);
 					}
 					else {
 					Connection c=DBconnection.mysqlcon();	
-					PreparedStatement st= c.prepareStatement("update  questions set question='"+ques+"',option1='"+op1+"',option2='"+op2+"',option3='"+op3+"',option4='"+op4+"',answer='"+ans+"' where number='"+num+"'");
+					PreparedStatement st= c.prepareStatement("delete from questions where number='"+num+"'");
 					st.executeUpdate();
 					JFrame mess= new JFrame();
 					mess.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(mess,"Sucessfully Updated.");
+					JOptionPane.showMessageDialog(mess,"Sucessfully Deleted.");
 					setVisible(false);
-					new UpdateQuestion().setVisible(true);}
+					new DeleteQuestion().setVisible(true);}
 					}
 					catch(Exception ex)
 					{
@@ -257,11 +255,11 @@ public class UpdateQuestion extends JFrame {
 		btnNewButton_2.setForeground(new Color(148, 0, 211));
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton_2.setBorder(null);
-		btnNewButton_2.setBounds(431, 84, 89, 23);
+		btnNewButton_2.setBounds(485, 82, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
 		textField_6 = new JTextField();
-		textField_6.setBounds(325, 85, 96, 20);
+		textField_6.setBounds(376, 82, 99, 23);
 		contentPane.add(textField_6);
 		textField_6.setColumns(10);
 		

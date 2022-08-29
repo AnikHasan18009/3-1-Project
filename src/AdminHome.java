@@ -16,10 +16,15 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminHome extends JFrame {
      public static int running=0;
 	private JPanel contentPane;
+	private JButton btnShowQuestions;
 
 	/**
 	 * Launch the application.
@@ -50,17 +55,9 @@ public class AdminHome extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBorderPainted(false);
-		menuBar.setBackground(SystemColor.text);
-		
-		menuBar.setBounds(300, 10, 590, 30);
-		contentPane.add(menuBar);
-		
-		JMenu mnNewMenu = new JMenu("Add Question");
-		mnNewMenu.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		JButton btnNewButton = new JButton("Add Question");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if(running == 0)
 				{
 					running=1;
@@ -72,19 +69,19 @@ public class AdminHome extends JFrame {
 					JOptionPane.showMessageDialog(er,"One window already open!");
 					
 				}
+				
 			}
 		});
-		mnNewMenu.setBackground(new Color(240, 248, 255));
-		mnNewMenu.setForeground(new Color(148, 0, 211));
-		mnNewMenu.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnNewMenu.setBorder(new LineBorder(SystemColor.window, 4));
-		menuBar.add(mnNewMenu);
+		btnNewButton.setBackground(new Color(255, 255, 255));
+		btnNewButton.setForeground(new Color(148, 0, 211));
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnNewButton.setBorder(new LineBorder(new Color(148, 0, 211), 3));
+		btnNewButton.setBounds(0, 42, 120, 65);
+		contentPane.add(btnNewButton);
 		
-		
-		JMenu mnNewMenu_1 = new JMenu("Update Question");
-		mnNewMenu_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		JButton btnUpdateQuestion = new JButton("Update Question");
+		btnUpdateQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if(running == 0)
 				{
 					running=1;
@@ -98,34 +95,71 @@ public class AdminHome extends JFrame {
 				}
 			}
 		});
-		mnNewMenu_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnNewMenu_1.setForeground(new Color(148, 0, 211));
-		mnNewMenu_1.setBorder(new LineBorder(SystemColor.window, 4));
-		menuBar.add(mnNewMenu_1);
+		btnUpdateQuestion.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnUpdateQuestion.setForeground(new Color(148, 0, 211));
+		btnUpdateQuestion.setBackground(new Color(255, 255, 255));
+		btnUpdateQuestion.setBorder(new LineBorder(new Color(148, 0, 211), 3));
+		btnUpdateQuestion.setBounds(0, 109, 120, 65);
+		contentPane.add(btnUpdateQuestion);
 		
-		JMenu mnNewMenu_2 = new JMenu("Delete Question");
-	
-		mnNewMenu_2.setForeground(new Color(148, 0, 211));
-		mnNewMenu_2.setBorder(new LineBorder(SystemColor.window, 4));
-		mnNewMenu_2.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		menuBar.add(mnNewMenu_2);
+		JButton btnDeleteQuestion = new JButton("Delete Question");
+		btnDeleteQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(running == 0)
+				{
+					running=1;
+					new DeleteQuestion().setVisible(true);
+				}
+				else {
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,"One window already open!");
+					
+				}
+				
+			}
+		});
+		btnDeleteQuestion.setBackground(new Color(255, 255, 255));
+		btnDeleteQuestion.setForeground(new Color(148, 0, 211));
+		btnDeleteQuestion.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnDeleteQuestion.setBorder(new LineBorder(new Color(148, 0, 211), 3));
+		btnDeleteQuestion.setBounds(0, 175, 120, 65);
+		contentPane.add(btnDeleteQuestion);
 		
-		JMenu mnNewMenu_3 = new JMenu("See Questions");
-		mnNewMenu_3.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnNewMenu_3.setBorder(new LineBorder(SystemColor.window, 4));
-		mnNewMenu_3.setForeground(new Color(148, 0, 211));
-		menuBar.add(mnNewMenu_3);
+		btnShowQuestions = new JButton("Show Questions");
+		btnShowQuestions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(running == 0)
+				{
+					running=1;
+					new SeeQuestions().setVisible(true);
+				}
+				else {
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,"One window already open!");
+					
+				}
+			}
+		});
+		btnShowQuestions.setBackground(new Color(255, 255, 255));
+		btnShowQuestions.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnShowQuestions.setForeground(new Color(148, 0, 211));
+		btnShowQuestions.setBorder(new LineBorder(new Color(148, 0, 211), 3));
+		btnShowQuestions.setBounds(0, 241, 120, 65);
+		contentPane.add(btnShowQuestions);
 		
-		JMenu mnNewMenu_4 = new JMenu("Student Results");
-		mnNewMenu_4.setForeground(new Color(148, 0, 211));
-		mnNewMenu_4.setBorder(new LineBorder(SystemColor.window, 4));
-		mnNewMenu_4.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		menuBar.add(mnNewMenu_4);
+		JButton btnStudentScores = new JButton("Student Scores");
+		btnStudentScores.setBackground(new Color(255, 255, 255));
+		btnStudentScores.setForeground(new Color(148, 0, 211));
+		btnStudentScores.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnStudentScores.setBorder(new LineBorder(new Color(148, 0, 211), 3));
+		btnStudentScores.setBounds(0, 307, 120, 65);
+		contentPane.add(btnStudentScores);
 		
-		JMenu mnLogout = new JMenu("Logout");
-		mnLogout.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if(running==1)
 				{
 					JFrame er= new JFrame();
@@ -135,7 +169,7 @@ public class AdminHome extends JFrame {
 				else {
 				JFrame lout= new JFrame();
 				lout.setAlwaysOnTop(true);
-				int decision= JOptionPane.showConfirmDialog(lout,"Do you want to logout?","",JOptionPane.YES_NO_OPTION);
+				int decision= JOptionPane.showConfirmDialog(lout,"Do you want to logout?","Logout",JOptionPane.YES_NO_OPTION);
 				if(decision==0)
 				{
 					setVisible(false);
@@ -143,9 +177,11 @@ public class AdminHome extends JFrame {
 				}}
 			}
 		});
-		mnLogout.setBorder(new LineBorder(SystemColor.window, 4));
-		mnLogout.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		mnLogout.setForeground(new Color(148, 0, 211));
-		menuBar.add(mnLogout);
+		btnLogout.setBackground(new Color(255, 255, 255));
+		btnLogout.setForeground(new Color(148, 0, 211));
+		btnLogout.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnLogout.setBorder(new LineBorder(new Color(148, 0, 211), 3));
+		btnLogout.setBounds(0, 373, 120, 65);
+		contentPane.add(btnLogout);
 	}
 }

@@ -5,6 +5,9 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class AdminLogin extends JFrame {
@@ -86,14 +89,32 @@ public class AdminLogin extends JFrame {
 		btnNewButton.setBorder(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().equals("admin") && passwordField.getText().equals("admin"))
-				{
-					setVisible(false);
-					new AdminHome().setVisible(true);
-			}
-				else {
-					JOptionPane.showMessageDialog(null,"Invalid username or password","",JOptionPane.ERROR_MESSAGE);
-				}
+				try {
+					Connection c=DBconnection.mysqlcon();	
+					Statement s= c.createStatement();
+					ResultSet r=s.executeQuery("select * from admins");
+					int flag =0;
+					while(r.next()) {
+					if(textField.getText().equals(r.getString(1)) && passwordField.getText().equals(r.getString(2)))
+					{
+						flag =1;
+						break;
+				    }
+					}
+					if(flag==1) {
+						setVisible(false);
+						new AdminHome().setVisible(true);
+					}
+					else
+						JOptionPane.showMessageDialog(null,"Invalid username or password","",JOptionPane.ERROR_MESSAGE);
+					}
+					catch(Exception ex)
+					{
+						JFrame er= new JFrame();
+						er.setAlwaysOnTop(true);
+						JOptionPane.showMessageDialog(er,ex);
+					}
+			
 				
 			}
 		});

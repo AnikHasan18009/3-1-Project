@@ -11,16 +11,19 @@ import javax.swing.JTextField;
 import java.sql.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.SwingConstants;
 
 public class AddQuestion extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtQuestion;
+	private JTextField txtOption;
+	private JTextField txtOption_1;
+	private JTextField txtOption_2;
+	private JTextField txtOption_3;
+	private JTextField txtAnswer;
     
 	/**
 	 * Launch the application.
@@ -45,7 +48,7 @@ public class AddQuestion extends JFrame {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(120, 120, 900, 450);
+		setBounds(210, 120, 900, 450);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
 		contentPane.setBackground(SystemColor.desktop);
@@ -55,47 +58,12 @@ public class AddQuestion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Add a New Question");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel.setForeground(SystemColor.textHighlightText);
 		lblNewLabel.setBackground(SystemColor.window);
 		lblNewLabel.setBounds(279, 0, 308, 45);
 		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Question");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setBounds(40, 118, 94, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Option 1");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_1.setBounds(40, 158, 94, 14);
-		contentPane.add(lblNewLabel_1_1);
-		
-		JLabel lblNewLabel_1_2 = new JLabel("Option 2");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_2.setBounds(40, 201, 94, 14);
-		contentPane.add(lblNewLabel_1_2);
-		
-		JLabel lblNewLabel_1_3 = new JLabel("Option 3");
-		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_3.setBounds(40, 247, 94, 14);
-		contentPane.add(lblNewLabel_1_3);
-		
-		JLabel lblNewLabel_1_4 = new JLabel("Option 4");
-		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_4.setBounds(40, 293, 94, 14);
-		contentPane.add(lblNewLabel_1_4);
-		
-		JLabel lblNewLabel_1_5 = new JLabel("Answer");
-		lblNewLabel_1_5.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1_5.setBounds(40, 334, 94, 14);
-		contentPane.add(lblNewLabel_1_5);
 		
 		JLabel lblNewLabel_1_6 = new JLabel("Question No.");
 		lblNewLabel_1_6.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -104,6 +72,8 @@ public class AddQuestion extends JFrame {
 		contentPane.add(lblNewLabel_1_6);
 		
 		JButton btnNewButton = new JButton("Close");
+		btnNewButton.setBorder(null);
+		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminHome.running=0;
@@ -112,68 +82,191 @@ public class AddQuestion extends JFrame {
 		});
 		btnNewButton.setForeground(new Color(148, 0, 211));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(801, 0, 89, 23);
+		btnNewButton.setBounds(801, 0, 99, 31);
 		contentPane.add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBorder(null);
-		textField.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textField.setBounds(155, 117, 600, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtQuestion = new JTextField();
+		txtQuestion.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtQuestion.getText().equals("Question"))
+				{
+					txtQuestion.setText("");
+					txtQuestion.setForeground(Color.black);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtQuestion.getText().equals(""))
+				{
+					txtQuestion.setText("Question");
+					txtQuestion.setForeground(Color.GRAY);
+				}
+			}
+		});
+		txtQuestion.setForeground(Color.GRAY);
+		txtQuestion.setText("Question");
+		txtQuestion.setBorder(null);
+		txtQuestion.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtQuestion.setBounds(40, 117, 818, 20);
+		contentPane.add(txtQuestion);
+		txtQuestion.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBorder(null);
-		textField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textField_1.setColumns(10);
-		textField_1.setBounds(155, 157, 600, 20);
-		contentPane.add(textField_1);
+		txtOption = new JTextField();
+		txtOption.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtOption.getText().equals("Option 1"))
+				{
+					txtOption.setText("");
+					txtOption.setForeground(Color.black);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtOption.getText().equals(""))
+				{
+					txtOption.setText("Option 1");
+					txtOption.setForeground(Color.GRAY);
+				}
+			}
+		});
+		txtOption.setForeground(Color.GRAY);
+		txtOption.setText("Option 1");
+		txtOption.setBorder(null);
+		txtOption.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtOption.setColumns(10);
+		txtOption.setBounds(40, 157, 818, 20);
+		contentPane.add(txtOption);
 		
-		textField_2 = new JTextField();
-		textField_2.setBorder(null);
-		textField_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textField_2.setColumns(10);
-		textField_2.setBounds(155, 200, 600, 20);
-		contentPane.add(textField_2);
+		txtOption_1 = new JTextField();
+		txtOption_1.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtOption_1.getText().equals("Option 2"))
+				{
+					txtOption_1.setText("");
+					txtOption_1.setForeground(Color.black);
+				}
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtOption_1.getText().equals(""))
+				{
+					txtOption_1.setText("Option 2");
+					txtOption_1.setForeground(Color.GRAY);
+				}
+			}
+		});
+		txtOption_1.setText("Option 2");
+		txtOption_1.setForeground(Color.GRAY);
+		txtOption_1.setBorder(null);
+		txtOption_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtOption_1.setColumns(10);
+		txtOption_1.setBounds(40, 200, 818, 20);
+		contentPane.add(txtOption_1);
 		
-		textField_3 = new JTextField();
-		textField_3.setBorder(null);
-		textField_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textField_3.setColumns(10);
-		textField_3.setBounds(155, 246, 600, 20);
-		contentPane.add(textField_3);
+		txtOption_2 = new JTextField();
+		txtOption_2.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtOption_2.getText().equals("Option 3"))
+				{
+					txtOption_2.setText("");
+					txtOption_2.setForeground(Color.black);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtOption_2.getText().equals(""))
+				{
+					txtOption_2.setText("Option 3");
+					txtOption_2.setForeground(Color.GRAY);
+				}
+			}
+		});
+		txtOption_2.setForeground(Color.GRAY);
+		txtOption_2.setText("Option 3");
+		txtOption_2.setBorder(null);
+		txtOption_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtOption_2.setColumns(10);
+		txtOption_2.setBounds(40, 246, 818, 20);
+		contentPane.add(txtOption_2);
 		
-		textField_4 = new JTextField();
-		textField_4.setBorder(null);
-		textField_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textField_4.setColumns(10);
-		textField_4.setBounds(155, 292, 600, 20);
-		contentPane.add(textField_4);
+		txtOption_3 = new JTextField();
+		txtOption_3.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtOption_3.getText().equals("Option 4"))
+				{
+					txtOption_3.setText("");
+					txtOption_3.setForeground(Color.black);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtOption_3.getText().equals(""))
+				{
+					txtOption_3.setText("Option 4");
+					txtOption_3.setForeground(Color.GRAY);
+				}
+			}
+		});
+		txtOption_3.setForeground(Color.GRAY);
+		txtOption_3.setText("Option 4");
+		txtOption_3.setBorder(null);
+		txtOption_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtOption_3.setColumns(10);
+		txtOption_3.setBounds(40, 292, 818, 20);
+		contentPane.add(txtOption_3);
 		
-		textField_5 = new JTextField();
-		textField_5.setBorder(null);
-		textField_5.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textField_5.setColumns(10);
-		textField_5.setBounds(155, 333, 600, 20);
-		contentPane.add(textField_5);
+		txtAnswer = new JTextField();
+		txtAnswer.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtAnswer.getText().equals("Answer"))
+				{
+					txtAnswer.setText("");
+					txtAnswer.setForeground(Color.black);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtAnswer.getText().equals(""))
+				{
+					txtAnswer.setText("Answer");
+					txtAnswer.setForeground(Color.GRAY);
+				}
+			}
+		});
+		txtAnswer.setForeground(Color.GRAY);
+		txtAnswer.setText("Answer");
+		txtAnswer.setBorder(null);
+		txtAnswer.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtAnswer.setColumns(10);
+		txtAnswer.setBounds(40, 333, 818, 20);
+		contentPane.add(txtAnswer);
 		
 		JLabel lblNewLabel_2 = new JLabel("0");
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_2.setBackground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(155, 85, 63, 21);
+		lblNewLabel_2.setBounds(155, 80, 63, 21);
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnNewButton_1 = new JButton("Save");
+		btnNewButton_1.setBorder(null);
+		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String num=lblNewLabel_2.getText();
-				String ques=textField.getText();
-				String op1=textField_1.getText();
-				String op2=textField_2.getText();
-				String op3=textField_3.getText();
-				String op4=textField_4.getText();
-				String ans=textField_5.getText();
+				String ques=txtQuestion.getText();
+				String op1=txtOption.getText();
+				String op2=txtOption_1.getText();
+				String op3=txtOption_2.getText();
+				String op4=txtOption_3.getText();
+				String ans=txtAnswer.getText();
 				try {
 					Connection c=DBconnection.mysqlcon();	
 					PreparedStatement st= c.prepareStatement("INSERT INTO questions VALUES('"+num+"','"+ques+"','"+op1+"','"+op2+"','"+op3+"','"+op4+"','"+ans+"')");
@@ -199,14 +292,16 @@ public class AddQuestion extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Clear");
+		btnNewButton_1_1.setBorder(null);
+		btnNewButton_1_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setText("");
-				textField_1.setText("");
-			    textField_2.setText("");
-				textField_3.setText("");
-				textField_4.setText("");
-				textField_5.setText("");
+				txtQuestion.setText("");
+				txtOption.setText("");
+			    txtOption_1.setText("");
+				txtOption_2.setText("");
+				txtOption_3.setText("");
+				txtAnswer.setText("");
 			}
 		});
 		btnNewButton_1_1.setForeground(new Color(148, 0, 211));
