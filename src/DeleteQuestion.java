@@ -54,20 +54,12 @@ public class DeleteQuestion extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(210, 120, 900, 450);
 		contentPane = new JPanel();
-		contentPane.setForeground(Color.GRAY);
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setForeground(new Color(0, 51, 102));
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Delete a Question");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setForeground(SystemColor.textHighlightText);
-		lblNewLabel.setBackground(SystemColor.window);
-		lblNewLabel.setBounds(279, 0, 308, 45);
-		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_7 = new JLabel("Question No.");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -75,18 +67,19 @@ public class DeleteQuestion extends JFrame {
 		lblNewLabel_7.setBounds(264, 86, 114, 14);
 		contentPane.add(lblNewLabel_7);
 		
-		JButton btnNewButton = new JButton("Close");
+		JButton btnNewButton = new JButton("X");
+		btnNewButton.setFocusable(false);
 		btnNewButton.setBorder(null);
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminHome.running=0;
+				QuestionManagement.running=0;
 				setVisible(false);
 			}
 		});
-		btnNewButton.setForeground(new Color(148, 0, 211));
+		btnNewButton.setForeground(new Color(0, 51, 102));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(801, 0, 99, 34);
+		btnNewButton.setBounds(825, 37, 42, 23);
 		contentPane.add(btnNewButton);
 		
 		txtQuestion = new JTextField();
@@ -144,6 +137,7 @@ public class DeleteQuestion extends JFrame {
 		contentPane.add(txtAnswer);
 		
 		JButton btnNewButton_1 = new JButton("Delete");
+		btnNewButton_1.setFocusable(false);
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -166,11 +160,22 @@ public class DeleteQuestion extends JFrame {
 					}
 					else {
 					Connection c=DBconnection.mysqlcon();	
-					PreparedStatement st= c.prepareStatement("delete from questions where number='"+num+"'");
+					PreparedStatement st= c.prepareStatement("delete from `"+AdminHome.selected_exam+"` where number='"+num+"'");
 					st.executeUpdate();
+					
+					Statement s= c.createStatement();
+					ResultSet r=s.executeQuery("select * from questions");
+					int i=1;
+					while(r.next()) {
+						String n=r.getString(1);
+						PreparedStatement ust= c.prepareStatement("update  `"+AdminHome.selected_exam+"` set number='"+String.valueOf(i)+"' where number='"+n+"'");
+						ust.executeUpdate();
+						i++;
+					}
 					JFrame mess= new JFrame();
 					mess.setAlwaysOnTop(true);
 					JOptionPane.showMessageDialog(mess,"Sucessfully Deleted.");
+					
 					setVisible(false);
 					new DeleteQuestion().setVisible(true);}
 					}
@@ -183,12 +188,13 @@ public class DeleteQuestion extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1.setBounds(534, 395, 107, 23);
+		btnNewButton_1.setBounds(534, 395, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Clear");
+		btnNewButton_1_1.setFocusable(false);
 		btnNewButton_1_1.setBorder(null);
 		btnNewButton_1_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -209,12 +215,13 @@ public class DeleteQuestion extends JFrame {
 				txtAnswer.setForeground(Color.GRAY);
 			}
 		});
-		btnNewButton_1_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_1_1.setBounds(313, 395, 89, 23);
 		contentPane.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_2 = new JButton("Search");
+		btnNewButton_2.setFocusable(false);
 		btnNewButton_2.setBackground(new Color(255, 255, 255));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,7 +229,7 @@ public class DeleteQuestion extends JFrame {
 				try {
 					Connection c=DBconnection.mysqlcon();	
 					Statement s= c.createStatement();
-					ResultSet r=s.executeQuery("select * from questions where number='"+num+"'");
+					ResultSet r=s.executeQuery("select * from `"+AdminHome.selected_exam+"` where number='"+num+"'");
 					if(r.next()) {
 						txtQuestion.setText(r.getString(2));
 						txtOption.setText(r.getString(3));
@@ -252,13 +259,14 @@ public class DeleteQuestion extends JFrame {
 					}
 			}
 		});
-		btnNewButton_2.setForeground(new Color(148, 0, 211));
+		btnNewButton_2.setForeground(new Color(0, 51, 102));
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton_2.setBorder(null);
 		btnNewButton_2.setBounds(485, 82, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
 		textField_6 = new JTextField();
+		textField_6.setBorder(null);
 		textField_6.setBounds(376, 82, 99, 23);
 		contentPane.add(textField_6);
 		textField_6.setColumns(10);

@@ -1,5 +1,3 @@
-
-import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.SystemColor;
 import java.awt.Font;
@@ -16,31 +14,27 @@ public class AdminLogin extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
 				try {
 					AdminLogin frame = new AdminLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,e);
 				}
-			}
-		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public AdminLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(220, 120, 800, 400);
+		//setBounds(20, 120, 800, 400);
+		setBounds(395, 150, 540, 400);
+		setAlwaysOnTop(true);
+		setUndecorated(true);
 		contentPane = new JPanel();
 		contentPane.setForeground(SystemColor.activeCaptionText);
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(new Color(0, 51, 102));
 		
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
@@ -49,25 +43,25 @@ public class AdminLogin extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(SystemColor.text);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(332, 69, 100, 14);
+		lblNewLabel.setBounds(230, 70, 100, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_1.setForeground(SystemColor.text);
-		lblNewLabel_1.setBounds(336, 149, 96, 14);
+		lblNewLabel_1.setBounds(234, 154, 96, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		textField = new JTextField();
 		textField.setBorder(null);
-		textField.setBounds(336, 92, 96, 20);
+		textField.setBounds(125, 98, 302, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBorder(null);
-		passwordField.setBounds(336, 174, 96, 20);
+		passwordField.setBounds(125, 179, 302, 20);
 		contentPane.add(passwordField);
 		
 		JCheckBox cbox = new JCheckBox("Show Password");
@@ -81,8 +75,8 @@ public class AdminLogin extends JFrame {
 			}
 		});
 		cbox.setForeground(SystemColor.text);
-		cbox.setBackground(SystemColor.desktop);
-		cbox.setBounds(333, 231, 113, 23);
+		cbox.setBackground(new Color(0, 51, 102));
+		cbox.setBounds(230, 206, 126, 23);
 		contentPane.add(cbox);
 		
 		JButton btnNewButton = new JButton("Login");
@@ -95,7 +89,7 @@ public class AdminLogin extends JFrame {
 					ResultSet r=s.executeQuery("select * from admins");
 					int flag =0;
 					while(r.next()) {
-					if(textField.getText().equals(r.getString(1)) && passwordField.getText().equals(r.getString(2)))
+					if(textField.getText().equals(r.getString(2)) && passwordField.getText().equals(r.getString(3)))
 					{
 						flag =1;
 						break;
@@ -120,22 +114,28 @@ public class AdminLogin extends JFrame {
 		});
 		btnNewButton.setBackground(SystemColor.window);
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		btnNewButton.setForeground(new Color(148, 0, 211));
-		btnNewButton.setBounds(231, 293, 89, 23);
+		btnNewButton.setForeground(new Color(0, 51, 102));
+		btnNewButton.setBounds(241, 263, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Back");
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 153, 0));
+		panel.setBounds(0, 0, 540, 30);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("X");
+		btnNewButton_1.setFocusable(false);
+		btnNewButton_1.setBounds(500, 0, 30, 30);
+		panel.add(btnNewButton_1);
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				new Home().setVisible(true);
 			}
 		});
-		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 11));
-		btnNewButton_1.setForeground(new Color(148, 0, 211));
-		btnNewButton_1.setBackground(SystemColor.text);
-		btnNewButton_1.setBounds(444, 293, 89, 23);
-		contentPane.add(btnNewButton_1);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnNewButton_1.setForeground(SystemColor.text);
+		btnNewButton_1.setBackground(new Color(255, 153, 0));
 	}
 }

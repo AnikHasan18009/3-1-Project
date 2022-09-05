@@ -1,4 +1,3 @@
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,21 +15,18 @@ import javax.swing.ImageIcon;
 public class Home extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
+	public static Home frame;
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
 				try {
-					Home frame = new Home();
+					frame = new Home();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,e);
 				}
-			}
-		});
+
+		
 	}
 
 	/**
@@ -49,7 +45,8 @@ public class Home extends JFrame {
 		JButton btnNewButton_1 = new JButton("Student");
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1.setFocusable(false);
+		btnNewButton_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -60,11 +57,12 @@ public class Home extends JFrame {
 		
 		JButton btnNewButton_2 = new JButton("Teacher");
 		btnNewButton_2.setBackground(Color.WHITE);
-		btnNewButton_2.setForeground(new Color(148, 0, 211));
+		btnNewButton_2.setFocusable(false);
+		btnNewButton_2.setForeground(new Color(0, 51, 102));
 		btnNewButton_2.setBorder(null);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				//setVisible(false);
 				new AdminLogin().setVisible(true);
 			}
 		});
@@ -74,8 +72,9 @@ public class Home extends JFrame {
 		
 		JButton btnNewButton_3 = new JButton("Exit");
 		btnNewButton_3.setBackground(Color.WHITE);
-		btnNewButton_3.setForeground(new Color(148, 0, 211));
+		btnNewButton_3.setForeground(new Color(0, 51, 102));
 		btnNewButton_3.setBorder(null);
+		btnNewButton_3.setFocusable(false);
 		btnNewButton_3.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,10 +85,10 @@ public class Home extends JFrame {
 				}
 			}
 		});
-		btnNewButton_3.setBounds(628, 173, 89, 40);
+		btnNewButton_3.setBounds(626, 173, 89, 40);
 		contentPane.add(btnNewButton_3);
 		
-		JLabel lblNewLabel = new JLabel("Quiz Application");
+		JLabel lblNewLabel = new JLabel("MCQ Exam Application");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(245, 255, 250));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));

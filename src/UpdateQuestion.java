@@ -1,6 +1,4 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -9,16 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
 
 public class UpdateQuestion extends JFrame {
 
@@ -35,17 +29,15 @@ public class UpdateQuestion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
 				try {
 					UpdateQuestion frame = new UpdateQuestion();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,e);
 				}
 			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -56,39 +48,33 @@ public class UpdateQuestion extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(210, 120, 900, 450);
 		contentPane = new JPanel();
+		contentPane.setFocusable(false);
 		contentPane.setForeground(Color.GRAY);
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Update a Question");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setForeground(SystemColor.textHighlightText);
-		lblNewLabel.setBackground(SystemColor.window);
-		lblNewLabel.setBounds(279, 0, 308, 45);
-		contentPane.add(lblNewLabel);
-		
 		JLabel lblNewLabel_7 = new JLabel("Question No.");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_7.setForeground(new Color(255, 255, 255));
-		lblNewLabel_7.setBounds(222, 86, 94, 14);
+		lblNewLabel_7.setBounds(294, 86, 94, 14);
 		contentPane.add(lblNewLabel_7);
 		
-		JButton btnNewButton = new JButton("Close");
+		JButton btnNewButton = new JButton("X");
+		btnNewButton.setFocusable(false);
 		btnNewButton.setBorder(null);
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminHome.running=0;
+				QuestionManagement.running=0;
 				setVisible(false);
 			}
 		});
-		btnNewButton.setForeground(new Color(148, 0, 211));
+		btnNewButton.setForeground(new Color(0, 51, 102));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(801, 0, 99, 34);
+		btnNewButton.setBounds(827, 41, 42, 23);
 		contentPane.add(btnNewButton);
 		
 		txtQuestion = new JTextField();
@@ -146,6 +132,7 @@ public class UpdateQuestion extends JFrame {
 		contentPane.add(txtAnswer);
 		
 		JButton btnNewButton_1 = new JButton("Update");
+		btnNewButton_1.setFocusable(false);
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -168,7 +155,7 @@ public class UpdateQuestion extends JFrame {
 					}
 					else {
 					Connection c=DBconnection.mysqlcon();	
-					PreparedStatement st= c.prepareStatement("update  questions set question='"+ques+"',option1='"+op1+"',option2='"+op2+"',option3='"+op3+"',option4='"+op4+"',answer='"+ans+"' where number='"+num+"'");
+					PreparedStatement st= c.prepareStatement("update  `"+AdminHome.selected_exam+"` set question='"+ques+"',option1='"+op1+"',option2='"+op2+"',option3='"+op3+"',option4='"+op4+"',answer='"+ans+"' where number='"+num+"'");
 					st.executeUpdate();
 					JFrame mess= new JFrame();
 					mess.setAlwaysOnTop(true);
@@ -185,12 +172,13 @@ public class UpdateQuestion extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1.setBounds(534, 395, 107, 23);
+		btnNewButton_1.setBounds(534, 395, 94, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Clear");
+		btnNewButton_1_1.setFocusable(false);
 		btnNewButton_1_1.setBorder(null);
 		btnNewButton_1_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -211,7 +199,7 @@ public class UpdateQuestion extends JFrame {
 				txtAnswer.setForeground(Color.GRAY);
 			}
 		});
-		btnNewButton_1_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_1_1.setBounds(313, 395, 89, 23);
 		contentPane.add(btnNewButton_1_1);
@@ -224,7 +212,7 @@ public class UpdateQuestion extends JFrame {
 				try {
 					Connection c=DBconnection.mysqlcon();	
 					Statement s= c.createStatement();
-					ResultSet r=s.executeQuery("select * from questions where number='"+num+"'");
+					ResultSet r=s.executeQuery("select * from `"+AdminHome.selected_exam+"` where number='"+num+"'");
 					if(r.next()) {
 						txtQuestion.setText(r.getString(2));
 						txtOption.setText(r.getString(3));
@@ -254,14 +242,15 @@ public class UpdateQuestion extends JFrame {
 					}
 			}
 		});
-		btnNewButton_2.setForeground(new Color(148, 0, 211));
+		btnNewButton_2.setForeground(new Color(0, 51, 102));
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnNewButton_2.setBorder(null);
-		btnNewButton_2.setBounds(431, 84, 89, 23);
+		btnNewButton_2.setBounds(504, 82, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
 		textField_6 = new JTextField();
-		textField_6.setBounds(325, 85, 96, 20);
+		textField_6.setBorder(null);
+		textField_6.setBounds(398, 82, 96, 23);
 		contentPane.add(textField_6);
 		textField_6.setColumns(10);
 		

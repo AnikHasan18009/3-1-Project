@@ -1,41 +1,31 @@
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
 import net.proteanit.sql.DbUtils;
-
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SeeQuestions extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 	
 		EventQueue.invokeLater(new Runnable() {
@@ -57,43 +47,43 @@ public class SeeQuestions extends JFrame {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(190, 120, 1000, 450);
+		setBounds(205, 120, 1000, 450);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Questions");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel.setForeground(SystemColor.textHighlightText);
-		lblNewLabel.setBackground(SystemColor.window);
-		lblNewLabel.setBounds(279, 0, 308, 45);
-		contentPane.add(lblNewLabel);
-		
-		JButton btnNewButton = new JButton("Close");
+		JButton btnNewButton = new JButton("X");
 		btnNewButton.setBorder(null);
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminHome.running=0;
+				QuestionManagement.running=0;
 				setVisible(false);
 			}
 		});
-		btnNewButton.setForeground(new Color(148, 0, 211));
+		btnNewButton.setForeground(new Color(0, 51, 102));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(891, 0, 99, 31);
+		btnNewButton.setBounds(950, 15, 40, 23);
 		contentPane.add(btnNewButton);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			int row =table.getSelectedRow();
+			String num= (table.getModel().getValueAt(row, 0)).toString();
+			new QuestionShow(num).setVisible(true);
+			}
+		});
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setRowHeight(30);
 		table.setGridColor(new Color(255, 255, 255));
 		table.setFont(new Font("Tahoma", Font.BOLD, 8));
-		table.setBackground(SystemColor.desktop);
+		table.setBackground(new Color(0, 51, 102));
 		table.setForeground(new Color(255, 255, 255));
 		table.setBorder(new LineBorder(new Color(255, 255, 255), 2));
 		table.setBounds(10, 56,1030 ,383);
@@ -104,7 +94,7 @@ public class SeeQuestions extends JFrame {
 		try {
 			Connection c=DBconnection.mysqlcon();	
 			Statement s= c.createStatement();
-			ResultSet r=s.executeQuery("select * from questions");
+			ResultSet r=s.executeQuery("select * from `"+AdminHome.selected_exam+"`");
 		    table.setModel(DbUtils.resultSetToTableModel(r));
 		    table.getColumnModel().getColumn(0).setPreferredWidth(48);
 		    table.getColumnModel().getColumn(1).setPreferredWidth(159);

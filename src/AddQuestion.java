@@ -1,4 +1,3 @@
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
@@ -13,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import javax.swing.SwingConstants;
+
 
 public class AddQuestion extends JFrame {
 
@@ -29,16 +28,14 @@ public class AddQuestion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
 				try {
 					AddQuestion frame = new AddQuestion();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,e);
 				}
-			}
-		});
 	}
 
 	/**
@@ -51,19 +48,11 @@ public class AddQuestion extends JFrame {
 		setBounds(210, 120, 900, 450);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(new Color(0, 51, 102));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Add a New Question");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setForeground(SystemColor.textHighlightText);
-		lblNewLabel.setBackground(SystemColor.window);
-		lblNewLabel.setBounds(279, 0, 308, 45);
-		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1_6 = new JLabel("Question No.");
 		lblNewLabel_1_6.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -71,18 +60,18 @@ public class AddQuestion extends JFrame {
 		lblNewLabel_1_6.setBounds(40, 83, 94, 14);
 		contentPane.add(lblNewLabel_1_6);
 		
-		JButton btnNewButton = new JButton("Close");
+		JButton btnNewButton = new JButton("X");
 		btnNewButton.setBorder(null);
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminHome.running=0;
+				QuestionManagement.running=0;
 				setVisible(false);
 			}
 		});
-		btnNewButton.setForeground(new Color(148, 0, 211));
+		btnNewButton.setForeground(new Color(0, 51, 102));
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton.setBounds(801, 0, 99, 31);
+		btnNewButton.setBounds(816, 48, 42, 23);
 		contentPane.add(btnNewButton);
 		
 		txtQuestion = new JTextField();
@@ -256,6 +245,7 @@ public class AddQuestion extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnNewButton_1 = new JButton("Save");
+		btnNewButton_1.setFocusable(false);
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -269,7 +259,7 @@ public class AddQuestion extends JFrame {
 				String ans=txtAnswer.getText();
 				try {
 					Connection c=DBconnection.mysqlcon();	
-					PreparedStatement st= c.prepareStatement("INSERT INTO questions VALUES('"+num+"','"+ques+"','"+op1+"','"+op2+"','"+op3+"','"+op4+"','"+ans+"')");
+					PreparedStatement st= c.prepareStatement("INSERT INTO `"+AdminHome.selected_exam+"` VALUES('"+num+"','"+ques+"','"+op1+"','"+op2+"','"+op3+"','"+op4+"','"+ans+"')");
 					st.executeUpdate();
 					JFrame mess= new JFrame();
 					mess.setAlwaysOnTop(true);
@@ -286,12 +276,13 @@ public class AddQuestion extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_1.setBounds(534, 395, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Clear");
+		btnNewButton_1_1.setFocusable(false);
 		btnNewButton_1_1.setBorder(null);
 		btnNewButton_1_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -304,14 +295,14 @@ public class AddQuestion extends JFrame {
 				txtAnswer.setText("");
 			}
 		});
-		btnNewButton_1_1.setForeground(new Color(148, 0, 211));
+		btnNewButton_1_1.setForeground(new Color(0, 51, 102));
 		btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_1_1.setBounds(313, 395, 89, 23);
 		contentPane.add(btnNewButton_1_1);
 		try {
 			Connection c=DBconnection.mysqlcon();	
 			Statement s= c.createStatement();
-			ResultSet r=s.executeQuery("select count(*) from questions");
+			ResultSet r=s.executeQuery("select count(*) from `"+AdminHome.selected_exam+"`");
 			r.next();
 			int no=r.getInt(1);
 			no++;
