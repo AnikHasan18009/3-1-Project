@@ -55,7 +55,7 @@ public class ExamSelector extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setAlwaysOnTop(true);
-		JLabel lblNewLabel = new JLabel("Select an Exam to Update");
+		JLabel lblNewLabel = new JLabel("Select an Exam");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -95,8 +95,15 @@ public class ExamSelector extends JFrame {
 				   String n=String.valueOf(comboBox.getSelectedItem());
 				   setVisible(false);
 				   AdminHome.selected_exam=n;
-				   //AdminHome.frame.setVisible(false);
+				   if(AdminHome.selected==1)
+				   {
 				   new QuestionManagement().setVisible(true);
+				   }
+				   else if(AdminHome.selected==2)
+				   {
+					   new StudentScores().setVisible(true);
+					   
+				   }
 			}
 		});
 		btnNewButton.setForeground(new Color(0, 51, 102));
@@ -111,6 +118,7 @@ public class ExamSelector extends JFrame {
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminHome.running=0;
+				AdminHome.selected=0;
 				setVisible(false);
 			}
 		});

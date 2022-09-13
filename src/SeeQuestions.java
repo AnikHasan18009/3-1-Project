@@ -71,6 +71,9 @@ public class SeeQuestions extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		table = new JTable();
+		table.getTableHeader().setBackground(new Color(0,51,102));
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 12));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

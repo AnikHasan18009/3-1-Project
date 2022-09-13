@@ -50,6 +50,7 @@ public class Home extends JFrame {
 		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new StudentLogin().setVisible(true);
 			}
 		});
 		btnNewButton_1.setBounds(177, 173, 89, 40);

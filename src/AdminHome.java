@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 public class AdminHome extends JFrame {
      public static int running=0;
      public static String selected_exam ="";
+     public static int selected=0;
 	private JPanel contentPane;
 	private JButton btnShowQuestions;
 	
@@ -98,6 +99,7 @@ public class AdminHome extends JFrame {
 						if(r.next())
 						{
 							running=1;
+							selected=1;
 							new ExamSelector().setVisible(true);
 						}
 						else
@@ -176,14 +178,14 @@ public class AdminHome extends JFrame {
 		btnDeleteQuestion.setBounds(0, 175, 167, 65);
 		contentPane.add(btnDeleteQuestion);
 		
-		btnShowQuestions = new JButton("Show Added Exams");
+		btnShowQuestions = new JButton("Enable/Dissable Exams");
 		btnShowQuestions.setFocusable(false);
 		btnShowQuestions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(running == 0)
 				{
 					running=1;
-					new SeeQuestions().setVisible(true);
+					new ShowExams().setVisible(true);
 				}
 				else {
 					JFrame er= new JFrame();
@@ -201,6 +203,24 @@ public class AdminHome extends JFrame {
 		contentPane.add(btnShowQuestions);
 		
 		JButton btnStudentScores = new JButton("Student Scores");
+		btnStudentScores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(running == 0)
+				{
+							running=1;
+							selected=2;
+							new ExamSelector().setVisible(true);
+					
+					
+				}
+				else {
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,"One window already open!");
+					
+				}
+			}
+		});
 		btnStudentScores.setFocusable(false);
 		btnStudentScores.setBackground(new Color(255, 102, 0));
 		btnStudentScores.setForeground(SystemColor.text);

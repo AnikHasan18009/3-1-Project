@@ -28,9 +28,7 @@ public class QuestionShow extends JFrame {
 		
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public QuestionShow(String num) {
 		setAlwaysOnTop(true);
 		setUndecorated(true);

@@ -165,6 +165,7 @@ public class QuestionManagement extends JFrame {
 					//AdminHome.frame.setVisible(true);
 					AdminHome.running=0;
 					AdminHome.selected_exam="";
+					AdminHome.selected=0;
 					
 				}}
 			}

@@ -97,11 +97,15 @@ public class AdminLogin extends JFrame {
 					}
 					if(flag==1) {
 						setVisible(false);
+						Home.frame.setVisible(false);
 						new AdminHome().setVisible(true);
 					}
-					else
-						JOptionPane.showMessageDialog(null,"Invalid username or password","",JOptionPane.ERROR_MESSAGE);
-					}
+					else {
+						JFrame er= new JFrame();
+						er.setAlwaysOnTop(true);
+						JOptionPane.showMessageDialog(er,"Invalid username or password","",JOptionPane.ERROR_MESSAGE);
+					
+					}}
 					catch(Exception ex)
 					{
 						JFrame er= new JFrame();
