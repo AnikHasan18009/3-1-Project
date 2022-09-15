@@ -100,7 +100,7 @@ public class ExamSelector extends JFrame {
 				   new QuestionManagement().setVisible(true);
 				   }
 				   else if(AdminHome.selected==2)
-				   {
+				   {  
 					   new StudentScores().setVisible(true);
 					   
 				   }

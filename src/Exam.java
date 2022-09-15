@@ -42,21 +42,25 @@ public class Exam extends JFrame implements ActionListener{
 	private ResultSet r;
 	private Statement s;
 	public static int running=0;
+	public static int flag=0;
 	public static String date="";
 	public static String time="";
 	public static int totalQuestions=0;
-	public static int currentQuestions;
+	public static int currentQuestion=0;
 	public static int correctAnswer=0;
 	public static int sec=10;
+	public static int addedTime=0;
 	public static String ans;
+	public static ArrayList<Integer> times= new ArrayList<Integer>();
+	public static ArrayList<String> questions= new ArrayList<String>();
 Timer timer = new Timer(1000, new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			sec--;
 			lblNewLabel_2_1.setText(String.valueOf(sec));
 			if(sec<=0) {
-				try {
-				showAnswer();
+				try {  
+				        showAnswer();
 				}
 				catch (Exception ex) {
 					JFrame er= new JFrame();
@@ -66,6 +70,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 			}
 			}
 		});
+
 	public static void main(String[] args) {
 		
 				try {
@@ -88,8 +93,6 @@ Timer timer = new Timer(1000, new ActionListener(){
 		    date = myDateObj.format(myFormatObj);  
 		    myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
 		    time= myDateObj.format(myFormatObj);
-
-		Border bd=BorderFactory.createLineBorder(new Color(148,0,211));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(40, 40, 1200, 600);
 		contentPane = new JPanel();
@@ -110,11 +113,14 @@ Timer timer = new Timer(1000, new ActionListener(){
 				int decision= JOptionPane.showConfirmDialog(lout,"Do you want to exit?","",JOptionPane.YES_NO_OPTION);
 				if(decision==0)
 				{
-					setVisible(false);
-					//AdminHome.frame.setVisible(true);
+					questions.clear();
+					times.clear();
+					addedTime=0;
+					currentQuestion=0;
+					timer.stop();
 					StudentHome.running=0;
 					StudentHome.selected_exam="";
-					
+					dispose();
 				}}
 			
 		});
@@ -141,19 +147,19 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea.setRows(2);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
-		textArea.setBounds(235, 155, 796, 38);
+		textArea.setBounds(235, 104, 796, 67);
 		contentPane.add(textArea);
 		
 		JLabel lblNewLabel_1 = new JLabel("Question No:");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(235, 101, 97, 33);
+		lblNewLabel_1.setBounds(235, 60, 97, 33);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_2.setBounds(342, 101, 64, 33);
+		lblNewLabel_2.setBounds(341, 60, 64, 33);
 		contentPane.add(lblNewLabel_2);
 		
 		textArea_1 = new JTextArea();
@@ -165,7 +171,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textArea_1.setLineWrap(true);
 		textArea_1.setWrapStyleWord(true);
-		textArea_1.setBounds(302, 228, 729, 38);
+		textArea_1.setBounds(302, 190, 729, 38);
 		contentPane.add(textArea_1);
 		
 		textArea_2 = new JTextArea();
@@ -177,7 +183,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_2.setLineWrap(true);
 		textArea_2.setWrapStyleWord(true);
 		textArea_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textArea_2.setBounds(302, 305, 729, 38);
+		textArea_2.setBounds(302, 264, 729, 38);
 		contentPane.add(textArea_2);
 		
 		textArea_3 = new JTextArea();
@@ -189,7 +195,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_3.setLineWrap(true);
 		textArea_3.setWrapStyleWord(true);
 		textArea_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textArea_3.setBounds(302, 380, 729, 38);
+		textArea_3.setBounds(302, 344, 729, 38);
 		contentPane.add(textArea_3);
 		
         textArea_4 = new JTextArea();
@@ -201,7 +207,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_4.setLineWrap(true);
 		textArea_4.setWrapStyleWord(true);
 		textArea_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textArea_4.setBounds(302, 459, 729, 38);
+		textArea_4.setBounds(302, 418, 729, 38);
 		contentPane.add(textArea_4);
 	    btnA = new JButton();
 		btnA.setFocusable(false);
@@ -210,7 +216,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		btnA.setBackground(Color.WHITE);
 		btnA.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnA.addActionListener(this);
-		btnA.setBounds(235, 229, 49, 33);
+		btnA.setBounds(235, 195, 49, 33);
 		
 		contentPane.add(btnA);
 		
@@ -221,7 +227,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		btnB.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnB.setBackground(Color.WHITE);
 		
-		btnB.setBounds(235, 306, 49, 33);
+		btnB.setBounds(235, 269, 49, 33);
 		contentPane.add(btnB);
 		
 		btnC = new JButton("C");
@@ -231,7 +237,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		btnC.setFont(new Font("Tahoma", Font.BOLD, 16));
 	
 		btnC.setBackground(Color.WHITE);
-		btnC.setBounds(235, 381, 49, 33);
+		btnC.setBounds(235, 349, 49, 33);
 		contentPane.add(btnC);
 		
 		btnD = new JButton("D");
@@ -240,21 +246,53 @@ Timer timer = new Timer(1000, new ActionListener(){
 		btnD.addActionListener(this);
 		btnD.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnD.setBackground(Color.WHITE);
-		btnD.setBounds(235, 459, 49, 33);
+		btnD.setBounds(235, 423, 49, 33);
 		contentPane.add(btnD);
 		
-		lblNewLabel_2_1 = new JLabel("10");
+		lblNewLabel_2_1 = new JLabel("");
 		lblNewLabel_2_1.setForeground(Color.WHITE);
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_2_1.setBounds(929, 101, 64, 33);
+		lblNewLabel_2_1.setBounds(967, 60, 64, 33);
 		contentPane.add(lblNewLabel_2_1);
+		
+		JButton btnNewButton = new JButton("Skip");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				timer.stop();
+				try{
+					int t=Integer.parseInt(lblNewLabel_2_1.getText());
+					if(times.get(currentQuestion)<=t)
+					        addedTime=t-times.get(currentQuestion);
+					else
+						times.set(currentQuestion,t);
+					currentQuestion++;
+					nextQuestion();
+				
+				}
+				catch(Exception ex)
+				{
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,ex);
+				}
+			}
+		});
+		btnNewButton.setForeground(new Color(0, 51, 102));
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnNewButton.setBounds(549, 484, 89, 33);
+		contentPane.add(btnNewButton);
 		try {
 			Connection c=DBconnection.mysqlcon();	
 			s= c.createStatement();
 			r=s.executeQuery("select count(*) from `"+StudentHome.selected_exam+"`");
 			r.next();
 			totalQuestions=r.getInt(1);
-			r=s.executeQuery("select * from `"+StudentHome.selected_exam+"`");
+			for(int i=1;i<=totalQuestions;i++)
+			{
+				questions.add(String.valueOf(i));
+				times.add(10);
+			}
 			nextQuestion();
 			}
 			catch(Exception e)
@@ -269,10 +307,17 @@ Timer timer = new Timer(1000, new ActionListener(){
 		}
 	public void nextQuestion() throws Exception
 	{
-		if(r.next()) {
+		if(currentQuestion>=questions.size())
+		{
+			currentQuestion=0;
+		}
+		if(currentQuestion<questions.size()) {
+		try {
+	  Connection c=DBconnection.mysqlcon();	
+		s= c.createStatement();
+		r=s.executeQuery("select * from `"+StudentHome.selected_exam+"` where number ='"+questions.get(currentQuestion)+"'");
+		r.next();
 		lblNewLabel_2.setText(r.getString(1));
-		lblNewLabel_2_1.setText("10");
-		sec=10;
 		textArea.setText(r.getString(2));
 		textArea_1.setText(r.getString(3));
 		textArea_2.setText(r.getString(4));
@@ -283,12 +328,27 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_3.setForeground(Color.WHITE);
 		textArea_4.setForeground(Color.WHITE);
 		ans=r.getString(7);
+		sec=times.get(currentQuestion)+addedTime;
+		lblNewLabel_2_1.setText(String.valueOf(sec));
 		timer.start();
 		}
+		catch(Exception ex)
+		{
+			JFrame er= new JFrame();
+			er.setAlwaysOnTop(true);
+			JOptionPane.showMessageDialog(er,ex);
+		}
+		
+		}
 		else {
+			questions.clear();
+			times.clear();
+			addedTime=0;
+			currentQuestion=0;
 			setVisible(false);
 			new Result().setVisible(true);
 		}
+		
 		
 	}
 	public void showAnswer() throws Exception
@@ -298,6 +358,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		btnC.setEnabled(false);
 		btnD.setEnabled(false);
 		timer.stop();
+		
 		if(ans.equals(textArea_1.getText()))
 			textArea_1.setForeground(Color.GREEN);
 		else
@@ -314,7 +375,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 			textArea_4.setForeground(Color.GREEN);
 		else
 			textArea_4.setForeground(Color.RED);
-          Timer pause = new Timer(3000, new ActionListener() {
+          Timer pause = new Timer(500, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			{
@@ -323,6 +384,9 @@ Timer timer = new Timer(1000, new ActionListener(){
 					btnB.setEnabled(true);
 					btnC.setEnabled(true);
 					btnD.setEnabled(true);
+					questions.remove(currentQuestion);
+					addedTime=Integer.parseInt(lblNewLabel_2_1.getText());
+					times.remove(currentQuestion);
 					nextQuestion();
 				}
 				catch(Exception ex)

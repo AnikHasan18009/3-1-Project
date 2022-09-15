@@ -73,7 +73,7 @@ public class Result extends JFrame {
 				}
 			}
 		});
-		btnLogout.setBackground(new Color(255, 102, 0));
+		btnLogout.setBackground(new Color(0, 51, 102));
 		btnLogout.setForeground(SystemColor.text);
 		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnLogout.setBorder(null);

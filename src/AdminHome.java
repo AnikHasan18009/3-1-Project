@@ -254,11 +254,20 @@ public class AdminHome extends JFrame {
 		btnLogout.setForeground(SystemColor.text);
 		btnLogout.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnLogout.setBorder(null);
-		btnLogout.setBounds(0, 373, 167, 65);
+		btnLogout.setBounds(0, 440, 167, 65);
 		contentPane.add(btnLogout);
 		
+		JButton btnWaitingApproval = new JButton("Waiting Approval");
+		btnWaitingApproval.setForeground(Color.WHITE);
+		btnWaitingApproval.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnWaitingApproval.setFocusable(false);
+		btnWaitingApproval.setBorder(null);
+		btnWaitingApproval.setBackground(new Color(255, 102, 0));
+		btnWaitingApproval.setBounds(0, 373, 167, 65);
+		contentPane.add(btnWaitingApproval);
+		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 102, 0));
+		panel.setBackground(new Color(255, 102, 51));
 		panel.setBounds(0, 0, 167, 563);
 		contentPane.add(panel);
 	}

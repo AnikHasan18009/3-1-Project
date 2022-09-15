@@ -58,7 +58,7 @@ public class StudentScores extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminHome.running=0;
-				AdminHome.selected=0;
+				AdminHome.selected=2;
 				AdminHome.selected_exam="";
 				setVisible(false);
 				new ExamSelector().setVisible(true);

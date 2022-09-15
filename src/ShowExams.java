@@ -20,13 +20,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.proteanit.sql.DbUtils;
+import javax.swing.table.DefaultTableModel;
 
 public class ShowExams extends JFrame {
 
 	
 	private JPanel contentPane;
-	private JTable table;
-
+	public static JTable table;
+    public static int running=0;
 	/**
 	 * Launch the application.
 	 */
@@ -48,7 +49,7 @@ public class ShowExams extends JFrame {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(250, 120, 800, 450);
+		setBounds(250, 120, 650, 450);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
 		contentPane.setBackground(new Color(0, 51, 102));
@@ -60,7 +61,7 @@ public class ShowExams extends JFrame {
 		JButton btnNewButton = new JButton("X");
 		btnNewButton.setFocusable(false);
 		btnNewButton.setBorder(null);
-		btnNewButton.setBackground(new Color(255, 102, 51));
+		btnNewButton.setBackground(new Color(0, 51, 102));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminHome.running=0;
@@ -73,6 +74,7 @@ public class ShowExams extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		table = new JTable();
+		table.setFocusable(false);
 		table.getTableHeader().setBackground(new Color(0,51,102));
 		table.getTableHeader().setForeground(Color.WHITE);
 		table.getTableHeader().setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -87,9 +89,13 @@ public class ShowExams extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(running==0) {
+					running=1;
 			int row =table.getSelectedRow();
 			String exam= (table.getModel().getValueAt(row, 0)).toString();
+			table.enable(false);
 			new ExamEnableDissable(exam).setVisible(true);
+				}
 			}
 		});
 		JScrollPane span = new JScrollPane(table);
@@ -100,7 +106,24 @@ public class ShowExams extends JFrame {
 			Connection c=DBconnection.mysqlcon();	
 			Statement s= c.createStatement();
 			ResultSet r=s.executeQuery("select * from `exams`");
-		    table.setModel(DbUtils.resultSetToTableModel(r));
+		    table.setModel(new DefaultTableModel(
+		    	new Object[][] {
+		    		{"python"},
+		    		{"java"},
+		    		{"c++"},
+		    	},
+		    	new String[] {
+		    		"name"
+		    	}
+		    ) {
+		    	boolean[] columnEditables = new boolean[] {
+		    		false
+		    	};
+		    	public boolean isCellEditable(int row, int column) {
+		    		return columnEditables[column];
+		    	}
+		    });
+		    table.getColumnModel().getColumn(0).setResizable(false);
 		    table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		   
 			}

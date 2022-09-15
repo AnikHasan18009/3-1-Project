@@ -44,22 +44,24 @@ public class ExamEnableDissable extends JFrame {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(480, 300, 400, 210);
+		setBounds(900, 270, 300, 210);
 		contentPane = new JPanel();
 		contentPane.setFocusable(false);
 		contentPane.setForeground(new Color(255, 255, 255));
-		contentPane.setBackground(new Color(0, 51, 102));
+		contentPane.setBackground(new Color(255, 102, 51));
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
 		
 		JButton btnNewButton = new JButton("X");
 		btnNewButton.setFocusable(false);
-		btnNewButton.setBounds(334, 0, 43, 34);
+		btnNewButton.setBounds(257, 0, 43, 34);
 		btnNewButton.setBorder(null);
-		btnNewButton.setBackground(new Color(0, 51, 102));
+		btnNewButton.setBackground(new Color(255, 102, 51));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ShowExams.running=0;
+				ShowExams.table.enable(true);
 				setVisible(false);
 			}
 		});
@@ -69,7 +71,7 @@ public class ExamEnableDissable extends JFrame {
 		contentPane.add(btnNewButton);
 			
 			JButton btnNewButton_1 = new JButton("Enable");
-			btnNewButton_1.setBounds(30, 162, 114, 35);
+			btnNewButton_1.setBounds(10, 162, 114, 35);
 			btnNewButton_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try{
@@ -107,7 +109,7 @@ public class ExamEnableDissable extends JFrame {
 			
 			JButton btnNewButton_1_1 = new JButton("Dissable");
 			btnNewButton_1_1.setFocusable(false);
-			btnNewButton_1_1.setBounds(263, 162, 114, 35);
+			btnNewButton_1_1.setBounds(176, 162, 114, 35);
 			btnNewButton_1_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try{
@@ -144,7 +146,7 @@ public class ExamEnableDissable extends JFrame {
 			contentPane.add(btnNewButton_1_1);
 			
 			JLabel lblNewLabel = new JLabel(exam);
-			lblNewLabel.setBounds(10, 60, 378, 50);
+			lblNewLabel.setBounds(10, 60, 283, 50);
 			lblNewLabel.setForeground(Color.WHITE);
 			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
