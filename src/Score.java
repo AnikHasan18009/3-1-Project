@@ -32,7 +32,7 @@ public class Score extends JFrame {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(400, 140, 580, 400);
+		setBounds(225, 120, 1000, 450);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(255, 255, 255));
 		contentPane.setBackground(new Color(0, 51, 102));
@@ -47,11 +47,13 @@ public class Score extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				StudentScores.running=0;
+				StudentScores.table.enable(true);
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnNewButton.setBounds(527, 6, 43, 23);
+		btnNewButton.setBounds(957, 11, 43, 23);
 		contentPane.add(btnNewButton);
 		
 		
@@ -64,7 +66,7 @@ public class Score extends JFrame {
 			textArea.setWrapStyleWord(true);
 			textArea.setLineWrap(true);
 			textArea.setRows(2);
-			textArea.setBounds(112, 88, 409, 23);
+			textArea.setBounds(167, 91, 409, 23);
 			contentPane.add(textArea);
 			
 			JTextArea textArea_1 = new JTextArea(id);
@@ -73,7 +75,7 @@ public class Score extends JFrame {
 			textArea_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_1.setColumns(200);
 			textArea_1.setRows(2);
-			textArea_1.setBounds(84, 140, 157, 23);
+			textArea_1.setBounds(658, 91, 216, 23);
 			contentPane.add(textArea_1);
 			
 			JTextArea textArea_2 = new JTextArea(dept);
@@ -81,7 +83,7 @@ public class Score extends JFrame {
 			textArea_2.setForeground(Color.WHITE);
 			textArea_2.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_2.setRows(2);
-			textArea_2.setBounds(165, 187, 356, 23);
+			textArea_2.setBounds(218, 154, 356, 23);
 			contentPane.add(textArea_2);
 			
 			JTextArea textArea_3 = new JTextArea(ses);
@@ -89,7 +91,7 @@ public class Score extends JFrame {
 			textArea_3.setForeground(Color.WHITE);
 			textArea_3.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_3.setRows(2);
-			textArea_3.setBounds(346, 140, 120, 23);
+			textArea_3.setBounds(701, 154, 169, 23);
 			contentPane.add(textArea_3);
 			
 			JTextArea textArea_4 = new JTextArea(date);
@@ -97,7 +99,7 @@ public class Score extends JFrame {
 			textArea_4.setForeground(Color.WHITE);
 			textArea_4.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_4.setRows(2);
-			textArea_4.setBounds(104, 287, 129, 23);
+			textArea_4.setBounds(161, 217, 129, 23);
 			contentPane.add(textArea_4);
 			
 			JTextArea textArea_5 = new JTextArea(exam);
@@ -106,49 +108,49 @@ public class Score extends JFrame {
 			textArea_5.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_5.setColumns(200);
 			textArea_5.setRows(2);
-			textArea_5.setBounds(112, 238, 173, 23);
+			textArea_5.setBounds(167, 280, 447, 23);
 			contentPane.add(textArea_5);
 			
 			JLabel lblNewLabel = new JLabel("Name:");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 			lblNewLabel.setForeground(SystemColor.text);
-			lblNewLabel.setBounds(51, 88, 65, 23);
+			lblNewLabel.setBounds(104, 89, 65, 23);
 			contentPane.add(lblNewLabel);
 			
 			JLabel lblOption = new JLabel("ID:");
 			lblOption.setHorizontalAlignment(SwingConstants.LEFT);
 			lblOption.setForeground(Color.WHITE);
 			lblOption.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblOption.setBounds(51, 140, 35, 23);
+			lblOption.setBounds(629, 89, 35, 23);
 			contentPane.add(lblOption);
 			
 			JLabel lblOption_1 = new JLabel("Department:");
 			lblOption_1.setHorizontalAlignment(SwingConstants.LEFT);
 			lblOption_1.setForeground(Color.WHITE);
 			lblOption_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblOption_1.setBounds(51, 187, 104, 23);
+			lblOption_1.setBounds(104, 152, 104, 23);
 			contentPane.add(lblOption_1);
 			
 			JLabel lblOption_2 = new JLabel("Session:");
 			lblOption_2.setHorizontalAlignment(SwingConstants.LEFT);
 			lblOption_2.setForeground(Color.WHITE);
 			lblOption_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblOption_2.setBounds(271, 140, 74, 23);
+			lblOption_2.setBounds(629, 152, 74, 23);
 			contentPane.add(lblOption_2);
 			
 			JLabel lblOption_3 = new JLabel("Date:");
 			lblOption_3.setHorizontalAlignment(SwingConstants.LEFT);
 			lblOption_3.setForeground(Color.WHITE);
 			lblOption_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblOption_3.setBounds(51, 287, 43, 23);
+			lblOption_3.setBounds(104, 215, 43, 23);
 			contentPane.add(lblOption_3);
 			
 			JLabel lblAnswer = new JLabel("Obtained Mark:");
 			lblAnswer.setHorizontalAlignment(SwingConstants.LEFT);
 			lblAnswer.setForeground(Color.WHITE);
 			lblAnswer.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblAnswer.setBounds(51, 337, 129, 23);
+			lblAnswer.setBounds(104, 342, 129, 23);
 			contentPane.add(lblAnswer);
 			
 			JTextArea textArea_6 = new JTextArea(time);
@@ -157,7 +159,7 @@ public class Score extends JFrame {
 			textArea_6.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_6.setRows(2);
 			textArea_6.setColumns(200);
-			textArea_6.setBounds(323, 287, 184, 23);
+			textArea_6.setBounds(686, 217, 184, 23);
 			contentPane.add(textArea_6);
 			
 			JTextArea textArea_7 = new JTextArea(omark);
@@ -166,7 +168,7 @@ public class Score extends JFrame {
 			textArea_7.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_7.setRows(2);
 			textArea_7.setColumns(200);
-			textArea_7.setBounds(184, 337, 82, 23);
+			textArea_7.setBounds(236, 343, 94, 23);
 			contentPane.add(textArea_7);
 			
 			JTextArea textArea_8 = new JTextArea(tmark);
@@ -175,28 +177,28 @@ public class Score extends JFrame {
 			textArea_8.setFont(new Font("Tahoma", Font.BOLD, 16));
 			textArea_8.setRows(2);
 			textArea_8.setColumns(200);
-			textArea_8.setBounds(375, 337, 104, 23);
+			textArea_8.setBounds(723, 280, 104, 23);
 			contentPane.add(textArea_8);
 			
 			JLabel lblExam = new JLabel("Exam:");
 			lblExam.setHorizontalAlignment(SwingConstants.LEFT);
 			lblExam.setForeground(Color.WHITE);
 			lblExam.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblExam.setBounds(51, 238, 59, 23);
+			lblExam.setBounds(104, 278, 59, 23);
 			contentPane.add(lblExam);
 			
 			JLabel lblTime = new JLabel("Time:");
 			lblTime.setHorizontalAlignment(SwingConstants.LEFT);
 			lblTime.setForeground(Color.WHITE);
 			lblTime.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblTime.setBounds(271, 287, 52, 23);
+			lblTime.setBounds(629, 215, 52, 23);
 			contentPane.add(lblTime);
 			
 			JLabel lblTotalMark = new JLabel("Total Mark:");
 			lblTotalMark.setHorizontalAlignment(SwingConstants.LEFT);
 			lblTotalMark.setForeground(Color.WHITE);
 			lblTotalMark.setFont(new Font("Tahoma", Font.BOLD, 16));
-			lblTotalMark.setBounds(271, 337, 94, 23);
+			lblTotalMark.setBounds(624, 278, 94, 23);
 			contentPane.add(lblTotalMark);
 			
 	}

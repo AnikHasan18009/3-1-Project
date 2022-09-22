@@ -171,7 +171,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		textArea_1.setLineWrap(true);
 		textArea_1.setWrapStyleWord(true);
-		textArea_1.setBounds(302, 190, 729, 38);
+		textArea_1.setBounds(302, 195, 729, 38);
 		contentPane.add(textArea_1);
 		
 		textArea_2 = new JTextArea();
@@ -183,7 +183,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_2.setLineWrap(true);
 		textArea_2.setWrapStyleWord(true);
 		textArea_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textArea_2.setBounds(302, 264, 729, 38);
+		textArea_2.setBounds(302, 269, 729, 38);
 		contentPane.add(textArea_2);
 		
 		textArea_3 = new JTextArea();
@@ -195,7 +195,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_3.setLineWrap(true);
 		textArea_3.setWrapStyleWord(true);
 		textArea_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textArea_3.setBounds(302, 344, 729, 38);
+		textArea_3.setBounds(302, 349, 729, 38);
 		contentPane.add(textArea_3);
 		
         textArea_4 = new JTextArea();
@@ -207,7 +207,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 		textArea_4.setLineWrap(true);
 		textArea_4.setWrapStyleWord(true);
 		textArea_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-		textArea_4.setBounds(302, 418, 729, 38);
+		textArea_4.setBounds(302, 423, 729, 38);
 		contentPane.add(textArea_4);
 	    btnA = new JButton();
 		btnA.setFocusable(false);
@@ -375,7 +375,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 			textArea_4.setForeground(Color.GREEN);
 		else
 			textArea_4.setForeground(Color.RED);
-          Timer pause = new Timer(500, new ActionListener() {
+          Timer pause = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			{

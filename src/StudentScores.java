@@ -20,11 +20,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.proteanit.sql.DbUtils;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.table.DefaultTableModel;
 
 public class StudentScores extends JFrame {
-
+    public static int running=0;
 	private JPanel contentPane;
-	private JTable table;
+	public static JTable table;
+	private JTextField textField;
 	public static void main(String[] args) {
 		
 				try {
@@ -76,6 +82,8 @@ public class StudentScores extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(running==0) {
+					running=1;
 			int row =table.getSelectedRow();
 			String id= (table.getModel().getValueAt(row, 0)).toString();
 			String name= (table.getModel().getValueAt(row, 1)).toString();
@@ -86,16 +94,18 @@ public class StudentScores extends JFrame {
 			String exam= (table.getModel().getValueAt(row, 4)).toString();
 			String tmark= (table.getModel().getValueAt(row, 5)).toString();
 			String omark= (table.getModel().getValueAt(row, 6)).toString();
+			table.enable(false);
 			new Score(name,id,dept,ses,exam,tmark,omark,date,time).setVisible(true);
+				}
 			}
 		});
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setRowHeight(30);
-		table.setGridColor(new Color(255, 255, 255));
+		table.setGridColor(Color.BLACK);
 		table.setFont(new Font("Tahoma", Font.BOLD, 8));
-		table.setBackground(new Color(0, 51, 102));
-		table.setForeground(new Color(255, 255, 255));
-		table.setBorder(new LineBorder(new Color(255, 255, 255), 2));
+		table.setBackground(Color.WHITE);
+		table.setForeground(Color.BLACK);
+		table.setBorder(null);
 		table.setBounds(10, 56,1030 ,383);
 		JScrollPane span = new JScrollPane(table);
 		span.setBounds(10, 66, 980, 359);
@@ -104,8 +114,8 @@ public class StudentScores extends JFrame {
 		try {
 			Connection c=DBconnection.mysqlcon();	
 			Statement s= c.createStatement();
-			ResultSet r=s.executeQuery("select * from `results` where exam='"+AdminHome.selected_exam+"'");
-		    table.setModel(DbUtils.resultSetToTableModel(r));
+			ResultSet r=s.executeQuery("select id,name,department,session,exam,`total mark`,`obtained mark`,date,time from `results` where exam='"+AdminHome.selected_exam+"'");
+			table.setModel(DbUtils.resultSetToTableModel(r));
 		    table.getColumnModel().getColumn(0).setPreferredWidth(50);
 		    table.getColumnModel().getColumn(1).setPreferredWidth(150);
 		    table.getColumnModel().getColumn(2).setPreferredWidth(70);
@@ -122,6 +132,66 @@ public class StudentScores extends JFrame {
 		    table.getColumnModel().getColumn(7).setMinWidth(30);
 		    table.getColumnModel().getColumn(8).setPreferredWidth(30);
 		    table.getColumnModel().getColumn(8).setMinWidth(30);
+		    
+		    JLabel lblNewLabel = new JLabel("Student ID");
+		    lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		    lblNewLabel.setForeground(Color.WHITE);
+		    lblNewLabel.setBounds(360, 21, 76, 14);
+		    contentPane.add(lblNewLabel);
+		    
+		    textField = new JTextField();
+		    textField.addKeyListener(new KeyAdapter() {
+		    	@Override
+		    	public void keyReleased(KeyEvent e) {
+		    		try {
+		    			Connection c=DBconnection.mysqlcon();	
+		    			Statement s= c.createStatement();
+		    			
+		    			String sid=textField.getText();
+		    		if(sid.equals(""))
+		    		{
+		    			ResultSet r=s.executeQuery("select id,name,department,session,exam,`total mark`,`obtained mark`,date,time from `results` where exam='"+AdminHome.selected_exam+"'");
+		    		    table.setModel(DbUtils.resultSetToTableModel(r));
+		    		}
+		    		else {
+
+		    			ResultSet r=s.executeQuery("select * from `results` where exam='"+AdminHome.selected_exam+"' and id='"+sid+"'");
+		    			if(r.next()) {
+		    			int serial=r.getInt(10);
+		    			int l1=serial-10,u1=serial,l2=serial+1,u2=serial+10;
+		    			ResultSet r2=s.executeQuery("(select id,name,department,session,exam,`total mark`,`obtained mark`,date,time from `results` where exam='"+AdminHome.selected_exam+"' and serial between "+String.valueOf(l1)+" and "+String.valueOf(u1)+" limit 11) union" 
+		    					+"(select id,name,department,session,exam,`total mark`,`obtained mark`,date,time from `results` where exam='"+AdminHome.selected_exam+"' and serial between "+String.valueOf(l2)+" and "+String.valueOf(u2)+" limit 10)");
+		    			
+		    		    table.setModel(DbUtils.resultSetToTableModel(r2));
+		    		    
+		    		    DefaultTableModel model =(DefaultTableModel)table.getModel();
+		    		    
+		    		    for (int i = 0; i < table.getRowCount(); i++) {
+		    		         if(table.getValueAt(i, 0).equals(sid))
+		    		        	 {
+		    		        	 table.addRowSelectionInterval(i, i);
+		    		        	 table.setSelectionBackground(new Color(0,51,102));
+		    		        	 table.setSelectionForeground(Color.WHITE);
+		                         
+		    		        	 }
+		    		       
+		    		        }
+		    			}
+		    		}
+		    		}
+		    		catch(Exception ex)
+					{
+						JFrame er= new JFrame();
+						er.setAlwaysOnTop(true);
+						JOptionPane.showMessageDialog(er,ex);
+					}
+		    		
+		    	}
+		    });
+		    textField.setFont(new Font("Tahoma", Font.BOLD, 14));
+		    textField.setBounds(445, 18, 141, 20);
+		    contentPane.add(textField);
+		    textField.setColumns(10);
 			}
 			catch(Exception e)
 			{
@@ -130,5 +200,4 @@ public class StudentScores extends JFrame {
 				JOptionPane.showMessageDialog(er,e);
 			}
 	}
-
 }

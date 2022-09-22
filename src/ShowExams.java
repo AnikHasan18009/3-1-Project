@@ -86,6 +86,7 @@ public class ShowExams extends JFrame {
 		table.setForeground(new Color(255, 255, 255));
 		table.setBorder(new LineBorder(new Color(255, 255, 255), 2));
 		table.setBounds(10, 56,1030 ,383);
+	
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -106,23 +107,7 @@ public class ShowExams extends JFrame {
 			Connection c=DBconnection.mysqlcon();	
 			Statement s= c.createStatement();
 			ResultSet r=s.executeQuery("select * from `exams`");
-		    table.setModel(new DefaultTableModel(
-		    	new Object[][] {
-		    		{"python"},
-		    		{"java"},
-		    		{"c++"},
-		    	},
-		    	new String[] {
-		    		"name"
-		    	}
-		    ) {
-		    	boolean[] columnEditables = new boolean[] {
-		    		false
-		    	};
-		    	public boolean isCellEditable(int row, int column) {
-		    		return columnEditables[column];
-		    	}
-		    });
+			table.setModel(DbUtils.resultSetToTableModel(r));
 		    table.getColumnModel().getColumn(0).setResizable(false);
 		    table.getColumnModel().getColumn(0).setPreferredWidth(100);
 		   

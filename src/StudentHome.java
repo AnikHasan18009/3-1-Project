@@ -26,6 +26,7 @@ public class StudentHome extends JFrame {
      public static String dept;
      public static String ses;
      public static String pass;
+     public static String email;
 	private JPanel contentPane;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -166,7 +167,7 @@ public class StudentHome extends JFrame {
 				if(decision==0)
 				{
 					setVisible(false);
-					new Home().setVisible(true);
+					Home.frame.setVisible(true);
 				}}
 			}
 		});
@@ -190,6 +191,7 @@ public class StudentHome extends JFrame {
 			  this.dept= r.getString(3);
 			  this.pass= r.getString(4);
 			  this.ses= r.getString(5);
+			  this.email=r.getString(6);
 			}
 		}
 		catch(Exception ex)

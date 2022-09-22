@@ -88,13 +88,15 @@ public class AdminLogin extends JFrame {
 					Statement s= c.createStatement();
 					ResultSet r=s.executeQuery("select * from admins");
 					int flag =0;
-					while(r.next()) {
+					r.next();
+					do {
 					if(textField.getText().equals(r.getString(2)) && passwordField.getText().equals(r.getString(3)))
 					{
 						flag =1;
 						break;
 				    }
 					}
+					while(r.next());
 					if(flag==1) {
 						setVisible(false);
 						Home.frame.setVisible(false);
@@ -107,10 +109,9 @@ public class AdminLogin extends JFrame {
 					
 					}}
 					catch(Exception ex)
-					{
-						JFrame er= new JFrame();
-						er.setAlwaysOnTop(true);
-						JOptionPane.showMessageDialog(er,ex);
+					{JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,e);
 					}
 			
 				

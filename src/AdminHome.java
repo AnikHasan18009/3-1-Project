@@ -27,6 +27,7 @@ public class AdminHome extends JFrame {
      public static int running=0;
      public static String selected_exam ="";
      public static int selected=0;
+     public static JButton btnWaitingApproval;
 	private JPanel contentPane;
 	private JButton btnShowQuestions;
 	
@@ -246,7 +247,7 @@ public class AdminHome extends JFrame {
 				if(decision==0)
 				{
 					setVisible(false);
-					new Home().setVisible(true);
+					 Home.frame.setVisible(true);
 				}}
 			}
 		});
@@ -257,13 +258,54 @@ public class AdminHome extends JFrame {
 		btnLogout.setBounds(0, 440, 167, 65);
 		contentPane.add(btnLogout);
 		
-		JButton btnWaitingApproval = new JButton("Waiting Approval");
+		btnWaitingApproval = new JButton("Waiting Approval");
+		btnWaitingApproval.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(running == 0)
+				{
+							running=1;
+							
+							new WaitingApproval().setVisible(true);
+					
+					
+				}
+				else {
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,"One window already open!");
+					
+				}
+			}
+		});
+		
 		btnWaitingApproval.setForeground(Color.WHITE);
 		btnWaitingApproval.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnWaitingApproval.setFocusable(false);
 		btnWaitingApproval.setBorder(null);
 		btnWaitingApproval.setBackground(new Color(255, 102, 0));
 		btnWaitingApproval.setBounds(0, 373, 167, 65);
+		try {
+			Connection c=DBconnection.mysqlcon();
+			Statement s= c.createStatement();
+			ResultSet r=s.executeQuery("select count(*) from `waiting approval`");
+			r.next();
+			String n=r.getString(1);
+			if(!n.equals("0"))
+			{
+				btnWaitingApproval.setText("Waiting Approval("+n+")");
+			}
+			else
+			{
+				btnWaitingApproval.setText("Waiting Approval");
+			}
+		
+		}
+		catch(Exception ex)
+		{
+			JFrame er= new JFrame();
+			er.setAlwaysOnTop(true);
+			JOptionPane.showMessageDialog(er,ex);
+		}
 		contentPane.add(btnWaitingApproval);
 		
 		JPanel panel = new JPanel();

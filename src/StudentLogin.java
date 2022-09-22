@@ -49,7 +49,7 @@ public class StudentLogin extends JFrame {
 		//setBounds(20, 120, 800, 400);
 		setBounds(395, 150, 540, 400);
 		setAlwaysOnTop(true);
-		setUndecorated(true);
+		setUndecorated(false);
 		contentPane = new JPanel();
 		contentPane.setForeground(SystemColor.activeCaptionText);
 		contentPane.setBackground(new Color(0, 51, 102));
@@ -124,7 +124,7 @@ public class StudentLogin extends JFrame {
 					{
 						JFrame er= new JFrame();
 						er.setAlwaysOnTop(true);
-						JOptionPane.showMessageDialog(er,"Invalid username or password!","",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(er,"Please Register!","",JOptionPane.ERROR_MESSAGE);
 					}
 					}
 			
@@ -168,6 +168,7 @@ public class StudentLogin extends JFrame {
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
 				new StudentRegister().setVisible(true);
 			}
 		});

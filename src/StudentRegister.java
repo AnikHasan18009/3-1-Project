@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.regex.Pattern;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -26,6 +28,7 @@ public class StudentRegister extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField_4;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -66,7 +69,7 @@ public class StudentRegister extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel_1.setForeground(SystemColor.text);
-		lblNewLabel_1.setBounds(26, 216, 354, 30);
+		lblNewLabel_1.setBounds(496, 222, 354, 30);
 		contentPane.add(lblNewLabel_1);
 		
 		textField = new JTextField();
@@ -77,7 +80,7 @@ public class StudentRegister extends JFrame {
 		
 		passwordField = new JPasswordField();
 		passwordField.setBorder(null);
-		passwordField.setBounds(26, 247, 354, 30);
+		passwordField.setBounds(496, 253, 354, 30);
 		contentPane.add(passwordField);
 		
 		JCheckBox cbox = new JCheckBox("Show Password");
@@ -92,7 +95,7 @@ public class StudentRegister extends JFrame {
 		});
 		cbox.setForeground(SystemColor.text);
 		cbox.setBackground(new Color(0, 51, 102));
-		cbox.setBounds(149, 286, 112, 23);
+		cbox.setBounds(626, 292, 112, 23);
 		contentPane.add(cbox);
 		
 		JButton btnNewButton = new JButton("Register");
@@ -103,23 +106,59 @@ public class StudentRegister extends JFrame {
 					Connection c=DBconnection.mysqlcon();	
 					Statement s= c.createStatement();
 					String id=textField.getText();
+					String name=textField_1.getText();
+					String dept=textField_2.getText();
+					String ses=textField_3.getText();
+					String email=textField_4.getText();
+					String pass=passwordField.getText();
+					
+					//String regex="^[a-zA-Z0-9_+&*-]+(?:\\\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,7}$";
+					 String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +  //part before @
+				                "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+					Pattern emailPattern = Pattern.compile(emailRegex);
+					
 					ResultSet r=s.executeQuery("select * from students where id='"+id+"'");
-				
-					if(r.next()) {
+					Statement s2= c.createStatement();
+					ResultSet r2=s2.executeQuery("select * from students where email='"+email+"'");
+					Statement s3= c.createStatement();
+					ResultSet r3=s3.executeQuery("select * from `waiting approval` where id='"+id+"'");
+				      if(email.equals("")||id.equals("") || name.equals("") || dept.equals("")||ses.equals("") || pass.equals(""))
+				      {
+				    	  JFrame er= new JFrame();
+							er.setAlwaysOnTop(true);
+							JOptionPane.showMessageDialog(er,"No field should be empty!","",JOptionPane.ERROR_MESSAGE);
+				      }
+					else if(r.next()) {
 						JFrame er= new JFrame();
 						er.setAlwaysOnTop(true);
 						JOptionPane.showMessageDialog(er,"This student id is already registered!","",JOptionPane.ERROR_MESSAGE);
 					}
+					else if(r2.next()) {
+						JFrame er= new JFrame();
+						er.setAlwaysOnTop(true);
+						JOptionPane.showMessageDialog(er,"This email is already registered!","",JOptionPane.ERROR_MESSAGE);
+					}
+					else if(!emailPattern.matcher(email).matches())
+				      {
+						JFrame er= new JFrame();
+						er.setAlwaysOnTop(true);
+						JOptionPane.showMessageDialog(er,"Please enter a valid email.","",JOptionPane.ERROR_MESSAGE);
+				      }
+				      
 					else {
-						String name=textField_1.getText();
-						String dept=textField_2.getText();
-						String ses=textField_3.getText();
-						String pass=passwordField.getText();
-						PreparedStatement st= c.prepareStatement("INSERT INTO `students` VALUES('"+id+"','"+name+"','"+dept+"','"+pass+"','"+ses+"')");
+						if(r3.next())
+						{
+			
+							Connection c1=DBconnection.mysqlcon();
+							PreparedStatement st= c1.prepareStatement("delete from `waiting approval` where id='"+id+"' or email='"+email+"'");
+							st.executeUpdate();
+						}
+						Connection c2=DBconnection.mysqlcon();
+						PreparedStatement st= c2.prepareStatement("INSERT INTO `waiting approval` VALUES('"+id+"','"+name+"','"+dept+"','"+pass+"','"+ses+"','"+email+"')");
 						st.executeUpdate();
 						JFrame mess= new JFrame();
 						mess.setAlwaysOnTop(true);
-						JOptionPane.showMessageDialog(mess,"Sucessfully Registered.");
+						JOptionPane.showMessageDialog(mess,"Check email for teacher's approval. ");
 						setVisible(false);
 						
 					}
@@ -206,6 +245,7 @@ public class StudentRegister extends JFrame {
 				textField_1.setText("");
 				textField_2.setText("");
 				textField_3.setText("");
+				textField_4.setText("");
 				passwordField.setText("");
 			}
 		});
@@ -215,5 +255,18 @@ public class StudentRegister extends JFrame {
 		btnClear.setBackground(Color.WHITE);
 		btnClear.setBounds(259, 401, 157, 23);
 		contentPane.add(btnClear);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBorder(null);
+		textField_4.setBounds(26, 253, 354, 30);
+		contentPane.add(textField_4);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEmail.setForeground(Color.WHITE);
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblEmail.setBounds(26, 232, 354, 14);
+		contentPane.add(lblEmail);
 	}
 }
