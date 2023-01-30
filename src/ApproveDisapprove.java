@@ -29,16 +29,12 @@ public class ApproveDisapprove extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-	}
 
-	/**
-	 * Create the frame.
-	 */
+//	public static void main(String[] args) {
+//		
+//	}
+
+
 	public ApproveDisapprove(String id,String name,String dept,String ses,String email,String pass) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(20, 120, 800, 400);

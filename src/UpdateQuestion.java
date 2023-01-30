@@ -25,23 +25,19 @@ public class UpdateQuestion extends JFrame {
 	private JTextField txtOption_3;
 	private JTextField txtAnswer;
 	private JTextField textField_6;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-				try {
-					UpdateQuestion frame = new UpdateQuestion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JFrame er= new JFrame();
-					er.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(er,e);
-				}
-			}
+	
+//	public static void main(String[] args) {
+//				try {
+//					UpdateQuestion frame = new UpdateQuestion();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//			}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public UpdateQuestion() {
 		setAlwaysOnTop(true);
 		setUndecorated(true);

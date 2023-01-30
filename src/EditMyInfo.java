@@ -30,22 +30,20 @@ public class EditMyInfo extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditMyInfo frame = new EditMyInfo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					EditMyInfo frame = new EditMyInfo();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					System.out.print(e);
+//				}
+//			}
+//		});
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public EditMyInfo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(20, 120, 800, 400);
@@ -93,11 +91,19 @@ public class EditMyInfo extends JFrame {
 					String dept=textField_2.getText();
 					String ses=textField_3.getText();
 					String pass=textField_4.getText();
+					if(id.equals("") || name.equals("") ||dept.equals("") || ses.equals("") || pass.equals(""))
+					{
+						JFrame mess= new JFrame();
+						mess.setAlwaysOnTop(true);
+						JOptionPane.showMessageDialog(mess,"No field should be empty.","",JOptionPane.ERROR_MESSAGE);
+					}
+					else {
 					PreparedStatement st= c.prepareStatement("update  `students` set name='"+name+"',department='"+dept+"',password='"+pass+"',session='"+ses+"' where id='"+id+"'");
 					st.executeUpdate();
 					JFrame mess= new JFrame();
 					mess.setAlwaysOnTop(true);
 					JOptionPane.showMessageDialog(mess,"Saved changes.");
+					}
 					//setVisible(false);
 				}
 					catch(Exception ex)

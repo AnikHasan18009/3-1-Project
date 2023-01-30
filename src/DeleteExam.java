@@ -23,18 +23,16 @@ public class DeleteExam extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-				try {
-					DeleteExam frame = new DeleteExam();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-	}
+
+//	public static void main(String[] args) {
+//		
+//				try {
+//					DeleteExam frame = new DeleteExam();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					System.out.println(e);
+//				}
+//	}
 
 	
 	public DeleteExam() {
@@ -78,7 +76,7 @@ public class DeleteExam extends JFrame {
 			JOptionPane.showMessageDialog(er,e);
 		}
 		comboBox.setBorder(null);
-		comboBox.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		comboBox.setFont(new Font("Tahoma", Font.BOLD, 18));
 		comboBox.setBackground(Color.WHITE);
 		comboBox.setBounds(88, 139, 426, 39);
 		contentPane.add(comboBox);

@@ -29,22 +29,19 @@ public class StudentRegister extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentRegister frame = new StudentRegister();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
+//	public static void main(String[] args) {
+//	
+//				try {
+//					StudentRegister frame = new StudentRegister();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//			}
+		
 	public StudentRegister() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(20, 120, 800, 400);
@@ -180,7 +177,7 @@ public class StudentRegister extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 153, 0));
+		panel.setBackground(new Color(255, 102, 0));
 		panel.setBounds(0, 0, 886, 30);
 		contentPane.add(panel);
 		panel.setLayout(null);

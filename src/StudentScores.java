@@ -31,20 +31,20 @@ public class StudentScores extends JFrame {
 	private JPanel contentPane;
 	public static JTable table;
 	private JTextField textField;
-	public static void main(String[] args) {
-		
-				try {
-					StudentScores frame = new StudentScores();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			
-	}
+//	public static void main(String[] args) {
+//		
+//				try {
+//					StudentScores frame = new StudentScores();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//			
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public StudentScores() {
 		setAlwaysOnTop(true);
 		setUndecorated(true);

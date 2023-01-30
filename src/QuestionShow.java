@@ -24,9 +24,9 @@ import java.awt.SystemColor;
 public class QuestionShow extends JFrame {
 
 	private JPanel contentPane;
-	public static void main(String[] args) {
-		
-	}
+//	public static void main(String[] args) {
+//		
+//	}
 
 	
 	public QuestionShow(String num) {
@@ -53,6 +53,8 @@ public class QuestionShow extends JFrame {
 		btnNewButton.setBackground(new Color(255, 255, 255));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SeeQuestions.opened=0;
+				SeeQuestions.table.enable(true);
 				setVisible(false);
 			}
 		});

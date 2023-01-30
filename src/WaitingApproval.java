@@ -25,22 +25,19 @@ public class WaitingApproval extends JFrame {
    public static int running=0;
 	private JPanel contentPane;
 	public static JTable table;
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WaitingApproval frame = new WaitingApproval();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+//	public static void main(String[] args) {
+//		
+//				try {
+//					WaitingApproval frame = new WaitingApproval();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//			}
+		
+	
 	public WaitingApproval() {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
@@ -136,11 +133,11 @@ public class WaitingApproval extends JFrame {
 		});
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setRowHeight(30);
-		table.setGridColor(new Color(255, 255, 255));
+		table.setGridColor(Color.BLACK);
 		table.setFont(new Font("Tahoma", Font.BOLD, 8));
-		table.setBackground(new Color(0, 51, 102));
-		table.setForeground(new Color(255, 255, 255));
-		table.setBorder(new LineBorder(new Color(255, 255, 255), 2));
+		table.setBackground(Color.WHITE);
+		table.setForeground(Color.BLACK);
+		table.setBorder(new LineBorder(new Color(0,0,0), 2));
 		table.setBounds(10, 56,1030 ,383);
 		JScrollPane span = new JScrollPane(table);
 		span.setBounds(10, 66, 980, 359);

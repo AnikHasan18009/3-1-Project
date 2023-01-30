@@ -14,16 +14,16 @@ public class AdminLogin extends JFrame {
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	public static void main(String[] args) {
-				try {
-					AdminLogin frame = new AdminLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JFrame er= new JFrame();
-					er.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(er,e);
-				}
-	}
+//	public static void main(String[] args) {
+//				try {
+//					AdminLogin frame = new AdminLogin();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//	}
 
 
 	public AdminLogin() {
@@ -124,7 +124,7 @@ public class AdminLogin extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 153, 0));
+		panel.setBackground(new Color(255, 102, 0));
 		panel.setBounds(0, 0, 540, 30);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -141,6 +141,6 @@ public class AdminLogin extends JFrame {
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnNewButton_1.setForeground(SystemColor.text);
-		btnNewButton_1.setBackground(new Color(255, 153, 0));
+		btnNewButton_1.setBackground(new Color(255, 102, 0));
 	}
 }

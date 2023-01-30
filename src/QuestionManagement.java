@@ -22,20 +22,18 @@ public class QuestionManagement extends JFrame {
 	private JPanel contentPane;
 	public static int running=0;
 	private JButton btnShowQuestions;
-	public static void main(String[] args) {
-		
-				try {
-					QuestionManagement frame = new QuestionManagement();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-			}
+//	public static void main(String[] args) {
+//		
+//				try {
+//					QuestionManagement frame = new QuestionManagement();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					System.out.println(e);
+//				}
+//			}
 	
 
-	/**
-	 * Create the frame.
-	 */
+
 	public QuestionManagement() {
 		Border bd=BorderFactory.createLineBorder(new Color(148,0,211));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

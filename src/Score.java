@@ -22,10 +22,6 @@ public class Score extends JFrame {
 
 	private JPanel contentPane;
 
-	
-	public static void main(String[] args) {
-		
-	}
 
 	
 	public Score(String name,String id,String dept,String ses,String exam,String tmark,String omark,String date,String time) {
@@ -49,6 +45,8 @@ public class Score extends JFrame {
 				setVisible(false);
 				StudentScores.running=0;
 				StudentScores.table.enable(true);
+				MyScore.opened=0;
+				MyScore.table.enable(true);
 			}
 		});
 		btnNewButton.setForeground(Color.WHITE);

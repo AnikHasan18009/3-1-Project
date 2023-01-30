@@ -28,23 +28,19 @@ public class ShowExams extends JFrame {
 	private JPanel contentPane;
 	public static JTable table;
     public static int running=0;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-				try {
-					ShowExams frame = new ShowExams();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JFrame er= new JFrame();
-					er.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(er,e);
-				}
-	}
+	
+//	public static void main(String[] args) {
+//				try {
+//					ShowExams frame = new ShowExams();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public ShowExams() {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
@@ -82,8 +78,8 @@ public class ShowExams extends JFrame {
 		table.setRowHeight(30);
 		table.setGridColor(new Color(255, 255, 255));
 		table.setFont(new Font("Tahoma", Font.BOLD, 14));
-		table.setBackground(new Color(0, 51, 102));
-		table.setForeground(new Color(255, 255, 255));
+		table.setBackground(Color.WHITE);
+		table.setForeground(Color.BLACK);
 		table.setBorder(new LineBorder(new Color(255, 255, 255), 2));
 		table.setBounds(10, 56,1030 ,383);
 	

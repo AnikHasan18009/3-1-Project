@@ -28,25 +28,23 @@ public class StudentHome extends JFrame {
      public static String pass;
      public static String email;
 	private JPanel contentPane;
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentHome frame = new StudentHome();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		
+//				try {
+//					StudentHome frame = new StudentHome();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//			}
+		
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public StudentHome() {
 
-		Border bd=BorderFactory.createLineBorder(new Color(148,0,211));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(40, 40, 1200, 600);
 		contentPane = new JPanel();

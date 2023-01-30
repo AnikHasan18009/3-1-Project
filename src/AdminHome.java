@@ -31,21 +31,20 @@ public class AdminHome extends JFrame {
 	private JPanel contentPane;
 	private JButton btnShowQuestions;
 	
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		
 				try {
 					AdminHome frame = new AdminHome();
 					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+									} 
+				catch (Exception e) {
+					JFrame er= new JFrame();
+					er.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(er,e);
 				}
 			}
-		});
-	}
+		
 				
 			
 	
@@ -53,7 +52,7 @@ public class AdminHome extends JFrame {
 
 	
 	public AdminHome() {
-		Border bd=BorderFactory.createLineBorder(new Color(148,0,211));
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(40, 40, 1200, 600);
 		contentPane = new JPanel();
@@ -179,7 +178,7 @@ public class AdminHome extends JFrame {
 		btnDeleteQuestion.setBounds(0, 175, 167, 65);
 		contentPane.add(btnDeleteQuestion);
 		
-		btnShowQuestions = new JButton("Enable/Dissable Exams");
+		btnShowQuestions = new JButton("Enable/Disable Exams");
 		btnShowQuestions.setFocusable(false);
 		btnShowQuestions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -309,7 +308,7 @@ public class AdminHome extends JFrame {
 		contentPane.add(btnWaitingApproval);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 102, 51));
+		panel.setBackground(new Color(255, 102, 0));
 		panel.setBounds(0, 0, 167, 563);
 		contentPane.add(panel);
 	}

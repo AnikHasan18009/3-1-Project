@@ -28,21 +28,19 @@ public class ExamSelector extends JFrame {
 
 	private JPanel contentPane;
 
-	public static void main(String[] args) {
-		
-				try {
-					ExamSelector frame = new ExamSelector();
-					frame.setVisible(true);
-				} catch (Exception e) {
-				System.out.println(e);
-				}
-			}
+//	public static void main(String[] args) {
+//		
+//				try {
+//					ExamSelector frame = new ExamSelector();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//				System.out.println(e);
+//				}
+//			}
 	
 	
 
-	/**
-	 * Create the frame.
-	 */
+
 	public ExamSelector() {
 		setBackground(SystemColor.inactiveCaption);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,7 +81,7 @@ public class ExamSelector extends JFrame {
 			JOptionPane.showMessageDialog(er,e);
 		}
 		comboBox.setBorder(null);
-		comboBox.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		comboBox.setFont(new Font("Tahoma", Font.BOLD, 18));
 		comboBox.setBackground(Color.WHITE);
 		comboBox.setBounds(88, 139, 426, 39);
 		contentPane.add(comboBox);

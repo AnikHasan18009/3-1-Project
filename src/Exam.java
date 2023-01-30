@@ -71,21 +71,19 @@ Timer timer = new Timer(1000, new ActionListener(){
 			}
 		});
 
-	public static void main(String[] args) {
-		
-				try {
-					Exam frame = new Exam();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JFrame er= new JFrame();
-					er.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(er,e);
-				}
-	}
+//	public static void main(String[] args) {
+//		
+//				try {
+//					Exam frame = new Exam();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	 
 	public Exam() {
 		 LocalDateTime myDateObj = LocalDateTime.now();   
@@ -110,7 +108,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 			
 				JFrame lout= new JFrame();
 				lout.setAlwaysOnTop(true);
-				int decision= JOptionPane.showConfirmDialog(lout,"Do you want to exit?","",JOptionPane.YES_NO_OPTION);
+				int decision= JOptionPane.showConfirmDialog(lout,"Do you want to exit?","Exit",JOptionPane.YES_NO_OPTION);
 				if(decision==0)
 				{
 					questions.clear();
@@ -286,7 +284,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 			Connection c=DBconnection.mysqlcon();	
 			s= c.createStatement();
 			r=s.executeQuery("select count(*) from `"+StudentHome.selected_exam+"`");
-			r.next();
+			if(r.next())
 			totalQuestions=r.getInt(1);
 			for(int i=1;i<=totalQuestions;i++)
 			{
@@ -316,13 +314,14 @@ Timer timer = new Timer(1000, new ActionListener(){
 	  Connection c=DBconnection.mysqlcon();	
 		s= c.createStatement();
 		r=s.executeQuery("select * from `"+StudentHome.selected_exam+"` where number ='"+questions.get(currentQuestion)+"'");
-		r.next();
+		if(r.next()) {
 		lblNewLabel_2.setText(r.getString(1));
 		textArea.setText(r.getString(2));
 		textArea_1.setText(r.getString(3));
 		textArea_2.setText(r.getString(4));
 		textArea_3.setText(r.getString(5));
 		textArea_4.setText(r.getString(6));
+		}
 		textArea_1.setForeground(Color.WHITE);
 		textArea_2.setForeground(Color.WHITE);
 		textArea_3.setForeground(Color.WHITE);
@@ -375,7 +374,7 @@ Timer timer = new Timer(1000, new ActionListener(){
 			textArea_4.setForeground(Color.GREEN);
 		else
 			textArea_4.setForeground(Color.RED);
-          Timer pause = new Timer(10, new ActionListener() {
+          Timer pause = new Timer(750, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			{

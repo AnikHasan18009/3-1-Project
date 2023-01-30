@@ -23,24 +23,19 @@ public class AddQuestion extends JFrame {
 	private JTextField txtOption_2;
 	private JTextField txtOption_3;
 	private JTextField txtAnswer;
-    
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-				try {
-					AddQuestion frame = new AddQuestion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JFrame er= new JFrame();
-					er.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(er,e);
-				}
-	}
+   
+//	public static void main(String[] args) {
+//				try {
+//					AddQuestion frame = new AddQuestion();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public AddQuestion() {
 		setAlwaysOnTop(true);
 		setUndecorated(true);

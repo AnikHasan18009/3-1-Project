@@ -24,25 +24,21 @@ import javax.swing.SwingConstants;
 public class Result extends JFrame {
 
 	private JPanel contentPane;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Result frame = new Result();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	
+//	public static void main(String[] args) {
+//		
+//				try {
+//					Result frame = new Result();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					System.out.print(e);
+//				}
+//			
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public Result() {
-		Border bd=BorderFactory.createLineBorder(new Color(148,0,211));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(40, 40, 1200, 600);
 		contentPane = new JPanel();
@@ -163,7 +159,7 @@ public class Result extends JFrame {
 		contentPane.add(textArea_1_2_1);
 		try {
 			Connection c=DBconnection.mysqlcon();	
-			PreparedStatement st= c.prepareStatement("INSERT INTO `results` VALUES('"+StudentLogin.id+"','"+StudentHome.name+"','"+StudentHome.dept+"','"+StudentHome.ses+"','"+StudentHome.selected_exam+"','"+textArea_1_2_1.getText()+"','"+textArea_1_2.getText()+"','"+Exam.date+"','"+Exam.time+"');");
+			PreparedStatement st= c.prepareStatement("INSERT INTO `results`(`id`, `name`, `department`, `session`, `exam`, `total mark`, `obtained mark`, `date`, `time`) VALUES('"+StudentLogin.id+"','"+StudentHome.name+"','"+StudentHome.dept+"','"+StudentHome.ses+"','"+StudentHome.selected_exam+"','"+textArea_1_2_1.getText()+"','"+textArea_1_2.getText()+"','"+Exam.date+"','"+Exam.time+"');");
 			st.executeUpdate();
 		}
 		catch(Exception ex)

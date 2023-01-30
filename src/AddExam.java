@@ -1,10 +1,9 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
+
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -29,19 +28,19 @@ public class AddExam extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtA;
 
-	public static void main(String[] args) {
-		
-		
-				try {
-					AddExam frame = new AddExam();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					JFrame er= new JFrame();
-					er.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(er,e);
-				}
-			
-	}
+//	public static void main(String[] args) {
+//		
+//		
+//				try {
+//					AddExam frame = new AddExam();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					JFrame er= new JFrame();
+//					er.setAlwaysOnTop(true);
+//					JOptionPane.showMessageDialog(er,e);
+//				}
+//			
+//	}
 
 	/**
 	 * Create the frame.
@@ -115,7 +114,7 @@ public class AddExam extends JFrame {
 				
 			}
 		});;
-		textArea.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		textArea.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textArea.setForeground(new Color(0, 0, 0));
 		textArea.setBounds(88, 154, 426, 39);
 		contentPane.add(textArea);

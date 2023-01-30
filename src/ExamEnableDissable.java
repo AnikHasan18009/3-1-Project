@@ -23,23 +23,19 @@ public class ExamEnableDissable extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			ExamEnableDissable frame = new ExamEnableDissable("");
-			frame.setVisible(true);
-		} catch (Exception e) {
-			JFrame er= new JFrame();
-			er.setAlwaysOnTop(true);
-			JOptionPane.showMessageDialog(er,e);
-		}
-	}
+	
+//	public static void main(String[] args) {
+//		try {
+//			ExamEnableDissable frame = new ExamEnableDissable("");
+//			frame.setVisible(true);
+//		} catch (Exception e) {
+//			JFrame er= new JFrame();
+//			er.setAlwaysOnTop(true);
+//			JOptionPane.showMessageDialog(er,e);
+//		}
+//	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public ExamEnableDissable(String exam) {
 		setAlwaysOnTop(true);
 		setUndecorated(true);
@@ -107,7 +103,7 @@ public class ExamEnableDissable extends JFrame {
 			btnNewButton_1.setBackground(Color.WHITE);
 			contentPane.add(btnNewButton_1);
 			
-			JButton btnNewButton_1_1 = new JButton("Dissable");
+			JButton btnNewButton_1_1 = new JButton("Disable");
 			btnNewButton_1_1.setFocusable(false);
 			btnNewButton_1_1.setBounds(176, 162, 114, 35);
 			btnNewButton_1_1.addActionListener(new ActionListener() {
